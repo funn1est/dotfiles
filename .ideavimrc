@@ -1,0 +1,156 @@
+let mapleader=' '
+
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set showmode
+set number
+set relativenumber
+set textwidth=80
+set scrolloff=3
+set history=100000
+set timeoutlen=300
+set clipboard=unnamed
+set clipboard+=ideaput
+
+""" Plugin
+" vim-surround plugin
+set surround
+set multiple-cursors
+set easymotion
+set keep-english-in-normal-and-restore-in-insert
+
+" clear the highlighted search result
+nnoremap <Leader>hl :nohlsearch<CR>
+nnoremap <silent><leader>/ :nohls<CR>
+nnoremap <leader><leader> :nohls<CR>
+
+" Move half page faster
+nnoremap <Leader>d  <C-d>
+nnoremap <Leader>u  <C-u>
+
+" Insert mode shortcut
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+inoremap <C-d> <Delete>
+
+" Quit insert mode
+inoremap jj <Esc>
+
+" Quit visual mode
+vnoremap v <Esc>
+
+" Move to the start of line
+nnoremap H ^
+vnoremap H ^
+
+" Move to the end of line
+nnoremap L $
+vnoremap L $
+
+" Redo
+nnoremap U <C-r>
+
+nnoremap <CR> G
+nnoremap <BS> gg
+
+" Yank to the end of line
+nnoremap Y y$
+
+xnoremap < <gv
+xnoremap > >gv
+
+""" Leader
+" Comment lines
+nnoremap <leader>;; :action CommentByLineComment<CR>
+vnoremap <leader>;  :action CommentByLineComment<CR>
+
+""" Files
+" Reload .ideavimrc
+nnoremap <leader>feR :source ~/.ideavimrc<CR>
+vnoremap <leader>feR <Esc>:source ~/.ideavimrc<CR>
+
+" Find Files
+nnoremap <leader>ff  :action GotoFile<CR>
+vnoremap <leader>ff  :action GotoFile<CR>
+
+" Search in project
+nnoremap <leader>fg  :action FindInPath<CR>
+vnoremap <leader>fg  :action FindInPath<CR>
+
+" Recent files
+nnoremap <leader>fr  :action RecentFiles<CR>
+vnoremap <leader>fr  :action RecentFiles<CR>
+
+" Save all files
+nnoremap <leader>fS  :action SaveAll<CR>
+vnoremap <leader>fS  :action SaveAll<CR>
+
+" Save single file
+nnoremap <leader>fs  :action SaveDocument<CR>
+vnoremap <leader>fs  :action SaveDocument<CR>
+
+" Copy file path
+nnoremap <leader>fyy :action CopyContentRootPath<CR>
+vnoremap <leader>fyy :action CopyContentRootPath<CR>
+
+""" Buffers
+" Switch among recently opened files
+nnoremap <leader>bb :action RecentFiles<CR>
+vnoremap <leader>bb :action RecentFiles<CR>
+
+" Close current tab
+nnoremap <leader>bd :action CloseContent<CR>
+vnoremap <leader>bd <Esc>:action CloseContent<CR>
+
+" Next Tab
+nnoremap <leader>bn :action NextTab<CR>
+vnoremap <leader>bn <Esc>:action NextTab<CR>
+
+" Previous Tab
+nnoremap <leader>bp :action PreviousTab<CR>
+vnoremap <leader>bp <Esc>:action PreviousTab<CR>
+
+" Open a new scratch buffer
+nnoremap <leader>bs :action NewScratchBuffer<CR>
+vnoremap <leader>bs <Esc>:action NewScratchBuffer<CR>
+
+" Reopen last closed tab
+nnoremap <leader>bu :action ReopenClosedTab<CR>
+vnoremap <leader>bu <Esc>:action ReopenClosedTab<CR>
+
+""" Insertion
+" Insert line below
+nnoremap <leader>ij o<Esc>k
+vnoremap <leader>ij <Esc>o<Esc>k
+
+" Insert line above
+nnoremap <leader>ik O<Esc>j
+vnoremap <leader>ik <Esc>O<Esc>j
+
+""" Jump
+"" easymotion
+" Jump to character
+map <leader>jj <Plug>(easymotion-s)
+" Jump to line
+map <leader>jl <Plug>(easymotion-bd-jk)
+" jump to word
+map <leader>jw <Plug>(easymotion-bd-w)
+
+""" Misc
+" Go to next change
+nnoremap g,         :action JumpToNextChange<CR>
+vnoremap g,         :action JumpToNextChange<CR>
+
+" Go to last change
+nnoremap g;         :action JumpToLastChange<CR>
+vnoremap g;         :action JumpToLastChange<CR>
+
+" Go to declaration
+nnoremap <leader>gd :action GotoDeclaration<CR>
+vnoremap <leader>gd <Esc>:action GotoDeclaration<CR>
