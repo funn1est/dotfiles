@@ -4,10 +4,10 @@ let mapleader = ' '
 call plug#begin('~/.config/nvim/plugged')
 " theme
 Plug 'chriskempson/base16-vim'
+Plug 'itchyny/lightline.vim'
 
 " tools
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'mhinz/vim-startify'
 
 " lsp
@@ -279,6 +279,21 @@ let base16colorspace=256
 let g:onedark_termcolors=256
 let g:onedark_terminal_italics=1
 hi Normal guibg=NONE
+
+" Lightline
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'filename': 'LightlineFilename',
+      \   'cocstatus': 'coc#status'
+      \ },
+      \ }
+function! LightlineFilename()
+  return expand('%:t') !=# '' ? @% : '[No Name]'
+endfunction
 
 if has('termguicolors')
   set termguicolors
