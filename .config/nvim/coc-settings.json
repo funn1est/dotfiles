@@ -1,4 +1,4 @@
 {
-  "explorer.icon.enableNerdfont": false,
+  "explorer.icon.enableNerdfont": true,
   "rust-analyzer.serverPath": "/usr/local/bin/rust-analyzer"
 }

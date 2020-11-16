@@ -65,6 +65,8 @@ nnoremap Y y$
 xnoremap < <gv
 xnoremap > >gv
 
+nnoremap ; :
+
 """ Leader
 " Comment lines
 nnoremap <leader>;; :action CommentByLineComment<CR>

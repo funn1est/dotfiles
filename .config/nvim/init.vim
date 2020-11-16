@@ -9,6 +9,7 @@ Plug 'itchyny/lightline.vim'
 " tools
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'mhinz/vim-startify'
+Plug 'justinmk/vim-sneak'
 
 " lsp
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -20,11 +21,14 @@ Plug 'leafgarland/typescript-vim'
 Plug 'HerringtonDarkholme/yats.vim'
 
 " others
+Plug 'cespare/vim-toml'
+Plug 'stephpy/vim-yaml'
+Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'dominikduda/vim_current_word'
 Plug 'junegunn/vim-easy-align'
-"Plug 'yggdroot/indentline'
+Plug 'yggdroot/indentline'
 Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
@@ -83,6 +87,8 @@ nnoremap Y y$
 xnoremap < <gv
 xnoremap > >gv
 
+nnoremap ; :
+
 nnoremap <C-h> :nohlsearch<cr>
 vnoremap <C-h> :nohlsearch<cr>
 
@@ -103,7 +109,17 @@ nmap ga <Plug>(EasyAlign)
 
 """ coc.nvim
 
-let g:coc_global_extensions = ['coc-rust-analyzer', 'coc-tsserver', 'coc-json']
+let g:coc_global_extensions = [
+  \ 'coc-rust-analyzer',
+  \ 'coc-tsserver',
+  \ 'coc-json',
+  \ 'coc-git',
+  \ 'coc-css',
+  \ 'coc-cssmodules',
+  \ 'coc-eslint',
+  \ 'coc-explorer',
+  \ 'coc-pairs'
+  \ ]
 
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -271,13 +287,13 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 """ coc.nvim
 
+let g:sneak#label = 1
+
 " theme settings
-colorscheme base16-gruvbox-dark-hard
-"colorscheme onedark
 set background=dark
 let base16colorspace=256
-let g:onedark_termcolors=256
-let g:onedark_terminal_italics=1
+let g:base16_shell_path='~/.config/base16-shell/scripts'
+colorscheme base16-gruvbox-dark-hard
 hi Normal guibg=NONE
 
 " Lightline
