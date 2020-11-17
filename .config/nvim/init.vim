@@ -7,7 +7,7 @@ Plug 'chriskempson/base16-vim'
 Plug 'itchyny/lightline.vim'
 
 " tools
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
 Plug 'mhinz/vim-startify'
 Plug 'justinmk/vim-sneak'
 
@@ -16,6 +16,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " html
 "Plug 'alvan/vim-closetag'
 
+" rs
+Plug 'rust-lang/rust.vim'
 " ts
 Plug 'leafgarland/typescript-vim'
 Plug 'HerringtonDarkholme/yats.vim'
@@ -102,6 +104,8 @@ nmap <leader>w :w<CR>
 "  autocmd BufReadPost * call setpos(".", getpos("'\""))
 "augroup END
 
+" # Plugins Settings
+
 " Plugin key-mappings.
 " vim-easy-align
 xmap ga <Plug>(EasyAlign)
@@ -125,7 +129,6 @@ let g:coc_global_extensions = [
 set hidden
 
 " Some servers have issues with backup files, see #649.
-set nobackup
 set nowritebackup
 
 " Give more space for displaying messages.
@@ -293,11 +296,16 @@ let g:sneak#label = 1
 set background=dark
 let base16colorspace=256
 let g:base16_shell_path='~/.config/base16-shell/scripts'
-colorscheme base16-gruvbox-dark-hard
+colorscheme base16-onedark
 hi Normal guibg=NONE
+
+if has('termguicolors')
+  set termguicolors
+endif
 
 " Lightline
 let g:lightline = {
+      \ 'colorscheme': 'one',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
@@ -311,6 +319,6 @@ function! LightlineFilename()
   return expand('%:t') !=# '' ? @% : '[No Name]'
 endfunction
 
-if has('termguicolors')
-  set termguicolors
-endif
+" vim-clap
+nnoremap <space>ff  :Clap files +name-only ++finder=rg --files --follow --hidden<cr>
+nnoremap <space>fa  :Clap grep<cr>
