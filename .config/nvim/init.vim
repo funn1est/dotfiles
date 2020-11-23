@@ -321,4 +321,4 @@ endfunction
 
 " vim-clap
 nnoremap <space>ff  :Clap files +name-only ++finder=rg --files --follow --hidden<cr>
-nnoremap <space>fa  :Clap grep<cr>
+nnoremap <space>fa  :Clap grep ++opt=-F<cr>
