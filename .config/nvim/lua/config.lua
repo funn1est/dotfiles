@@ -10,6 +10,7 @@ opt('termguicolors', true)
 opt('mouse', 'a')
 opt('clipboard', 'unnamedplus')
 
+opt('hidden', true)
 opt('number', true)
 opt('relativenumber', true)
 opt('cursorline', true)
@@ -32,6 +33,10 @@ opt('smartcase', true)
 
 opt('timeoutlen', 300)
 opt('updatetime', 300)
+
+opt('shortmess', vim.o.shortmess .. 'c')
+opt('signcolumn', 'number')
+
 opt('undofile', true)
 
 opt('listchars', 'nbsp:¬,eol:¶,extends:»,precedes:«,trail:•')
@@ -53,10 +58,11 @@ map('n', '<leader>ik', 'O<esc>j')
 map('x', '<', '<gv')
 map('x', '>', '>gv')
 
-require('config.compe')
+require('config.coc')
+--require('config.compe')
 require('config.galaxyline')
 require('config.indentline')
-require('config.lsp')
+--require('config.lsp')
 require('config.nvim_bufferline')
 require('config.nvim_tree')
 require('config.nvim_treesitter')
@@ -65,4 +71,4 @@ require('config.vim_sneak')
 
 require('colorizer').setup()
 require('nvim-autopairs').setup()
-require('lspkind').init()
+--require('lspkind').init()

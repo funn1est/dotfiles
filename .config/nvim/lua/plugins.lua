@@ -14,11 +14,12 @@ return packer.startup(function ()
   use 'justinmk/vim-sneak'
 
   -- lang
-  use 'neovim/nvim-lspconfig'
-  use 'kabouzeid/nvim-lspinstall'
-  use 'hrsh7th/nvim-compe'
+  --use 'neovim/nvim-lspconfig'
+  --use 'kabouzeid/nvim-lspinstall'
+  --use 'hrsh7th/nvim-compe'
+  --use 'onsails/lspkind-nvim'
+  use { 'neoclide/coc.nvim', branch = 'release' }
   use 'nvim-treesitter/nvim-treesitter'
-  use 'onsails/lspkind-nvim'
   use 'windwp/nvim-autopairs'
   use 'alvan/vim-closetag'
 
