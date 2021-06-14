@@ -9,13 +9,13 @@ require("telescope").setup {
             "--column",
             "--smart-case"
         },
-        prompt_position = "bottom",
+        prompt_position = "top",
         prompt_prefix = " ",
         selection_caret = " ",
         entry_prefix = "  ",
         initial_mode = "insert",
         selection_strategy = "reset",
-        sorting_strategy = "descending",
+        sorting_strategy = "ascending",
         layout_strategy = "horizontal",
         layout_defaults = {
             horizontal = {
@@ -60,3 +60,4 @@ local opts = { noremap = true, silent = false }
 map('n', '<leader>ff', '<cmd>Telescope find_files<cr>', opts)
 map('n', '<leader>fb', '<cmd>Telescope buffers<cr>', opts)
 map('n', '<leader>fg', '<cmd>Telescope live_grep<cr>', opts)
+map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', opts)

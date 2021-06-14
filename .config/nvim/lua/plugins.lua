@@ -16,7 +16,6 @@ return packer.startup(function ()
   -- lang
   use 'neovim/nvim-lspconfig'
   use 'kabouzeid/nvim-lspinstall'
-  use 'nvim-lua/lsp_extensions.nvim'
   use 'hrsh7th/nvim-compe'
   use 'nvim-treesitter/nvim-treesitter'
   use 'onsails/lspkind-nvim'
