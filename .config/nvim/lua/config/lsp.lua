@@ -89,9 +89,28 @@ local rust_fmt = {
   lintFormats = { '%f:%l:%c: %m' },
 }
 
+local eslint_d = {
+  lintCommand = 'eslint_d -f visualstudio --stdin --stdin-filename ${INPUT}',
+  lintSource = 'eslint_d',
+  lintStdin = true,
+  lintFormats = { '%f(%l,%c): %tarning %m', '%f(%l,%c): %rror %m' },
+  lintIgnoreExitCode = true,
+  formatCommand = 'eslint_d --fix-to-stdout --stdin --stdin-filename ${INPUT}',
+  formatStdin = true,
+}
+
+local prettierd = {
+  formatCommand = 'prettier_d_slim --config-precedence prefer-file --stdin --stdin-filepath ${INPUT}',
+  formatStdin = true,
+}
+
 local languages = {
   lua = { lua_fmt },
   --rust = { rust_fmt},
+  javascript = { prettierd, eslint_d },
+  typescript = { prettierd, eslint_d },
+  javascriptreact = { prettierd, eslint_d },
+  typescriptreact = { prettierd, eslint_d },
 }
 
 local setups = {
@@ -103,6 +122,19 @@ local setups = {
       rootMarkers = { '.git/' },
       languages = languages,
     },
+  },
+  typescript = {
+    on_attach = function(client)
+      client.resolved_capabilities.document_formatting = false
+      require('nvim-lsp-ts-utils').setup({
+        -- formatting
+        enable_formatting = false,
+        formatter = 'prettier_d_slim',
+        formatter_config_fallback = 'eslint_d',
+      })
+      on_attach(client)
+    end,
+    capabilities = make_config().capabilities,
   },
 }
 

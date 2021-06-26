@@ -26,6 +26,8 @@ return packer.startup(function()
 
   -- rust
   use('simrat39/rust-tools.nvim')
+  -- ts
+  use('jose-elias-alvarez/nvim-lsp-ts-utils')
 
   use('kyazdani42/nvim-tree.lua')
   use('kyazdani42/nvim-web-devicons')
