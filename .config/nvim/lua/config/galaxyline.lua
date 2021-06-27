@@ -1,60 +1,136 @@
 local gl = require('galaxyline')
 local gls = gl.section
 local condition = require('galaxyline.condition')
+local fileinfo = require('galaxyline.provider_fileinfo')
 
 gl.short_line_list = { 'NvimTree' }
 
+local theme = {
+  base00 = '#282c34',
+  base01 = '#353b45',
+  base02 = '#3e4451',
+  base03 = '#545862',
+  base04 = '#565c64',
+  base05 = '#abb2bf',
+  base06 = '#b6bdca',
+  base07 = '#c8ccd4',
+  base08 = '#e06c75',
+  base09 = '#d19a66',
+  base0A = '#e5c07b',
+  base0B = '#98c379',
+  base0C = '#56b6c2',
+  base0D = '#61afef',
+  base0E = '#c678dd',
+  base0F = '#be5046',
+}
+
 local colors = {
-  bg = '#282c34',
-  fg = '#abb2bf',
-  green = '#97C378',
-  red = '#e06c75',
-  lightbg = '#353b45',
-  lightbg2 = '#c8ccd4',
-  blue = '#61afef',
-  yellow = '#e5c07b',
-  grey = '#545862',
+  bg = theme.base00,
+  fg = theme.base05,
+  lighter_bg = theme.base01,
+  selection_bg = theme.base02,
+  dark_fg = theme.base04,
+  light_fg = theme.base06,
+  light_bg = theme.base07,
+  red1 = theme.base08,
+  red2 = theme.base0F,
+  orange = theme.base09,
+  yellow = theme.base0A,
+  green = theme.base0B,
+  cyan = theme.base0C,
+  blue = theme.base0D,
+  magenta = theme.base0E,
 }
 
 local mode_map = {
-  n = 'NORMAL',
-  i = 'INSERT',
-  R = 'REPLACE',
-  v = 'VISUAL',
-  V = 'V-LINE',
+  ['n'] = 'NORMAL',
+  ['no'] = 'O-PENDING',
+  ['nov'] = 'O-PENDING',
+  ['noV'] = 'O-PENDING',
+  ['no'] = 'O-PENDING',
+  ['niI'] = 'NORMAL',
+  ['niR'] = 'NORMAL',
+  ['niV'] = 'NORMAL',
+  ['v'] = 'VISUAL',
+  ['V'] = 'V-LINE',
   [''] = 'V-BLOCK',
-  c = 'COMMAND',
-  s = 'SELECT',
-  S = 'S-LINE',
+  ['s'] = 'SELECT',
+  ['S'] = 'S-LINE',
   [''] = 'S-BLOCK',
-  t = 'TERMINAL',
+  ['i'] = 'INSERT',
+  ['ic'] = 'INSERT',
+  ['ix'] = 'INSERT',
+  ['R'] = 'REPLACE',
+  ['Rc'] = 'REPLACE',
+  ['Rv'] = 'V-REPLACE',
+  ['Rx'] = 'REPLACE',
+  ['c'] = 'COMMAND',
+  ['cv'] = 'EX',
+  ['ce'] = 'EX',
+  ['r'] = 'REPLACE',
+  ['rm'] = 'MORE',
+  ['r?'] = 'CONFIRM',
+  ['!'] = 'SHELL',
+  ['t'] = 'TERMINAL',
+}
+
+function get_mode()
+  local mode = vim.api.nvim_get_mode().mode
+  if mode_map[mode] == nil then
+    return mode
+  end
+  return mode_map[mode]
+end
+
+function get_mode_color(mode)
+  local mode_colors = {
+    ['NORMAL'] = colors.green,
+    ['INSERT'] = colors.blue,
+    ['COMMAND'] = colors.orange,
+    ['VISUAL'] = colors.magenta,
+    ['V-LINE'] = colors.magenta,
+    ['V-BLOCK'] = colors.magenta,
+    ['REPLACE'] = colors.red1,
+    ['V-REPLACE'] = colors.red1,
+  }
+
+  local color = mode_colors[mode]
+
+  if color == nil then
+    color = colors.red2
+  end
+
+  return color
+end
+
+gls.left[1] = {
+  ViMode = {
+    provider = function()
+      local mode = get_mode()
+      vim.api.nvim_command('hi GalaxyViMode guibg=' .. get_mode_color(mode))
+      return '  ' .. mode .. ' '
+    end,
+    highlight = { colors.bg, colors.bg, 'bold' },
+    separator_highlight = { colors.bg, colors.bg },
+  },
 }
 
 gls.left[2] = {
-  statusIcon = {
+  FileIcon = {
     provider = function()
-      return '   '
+      local icon = fileinfo.get_file_icon()
+      return '  ' .. icon
     end,
-    highlight = { colors.bg, colors.blue },
-    separator = '  ',
-    separator_highlight = { colors.blue, colors.lightbg },
+    condition = condition.buffer_not_empty,
+    highlight = { fileinfo.get_file_icon_color, colors.lighter_bg },
   },
 }
 
 gls.left[3] = {
-  FileIcon = {
-    provider = 'FileIcon',
-    condition = condition.buffer_not_empty,
-    highlight = { colors.fg, colors.lightbg },
-  },
-}
-
-gls.left[4] = {
   FileName = {
     provider = { 'FileName' },
     condition = condition.buffer_not_empty,
-    highlight = { colors.fg, colors.lightbg },
-    separator = ' ',
+    highlight = { colors.fg, colors.lighter_bg },
     separator_highlight = { colors.lightbg, colors.lightbg2 },
   },
 }
@@ -66,7 +142,6 @@ gls.left[5] = {
       return '  ' .. dir_name .. ' '
     end,
     highlight = { colors.grey, colors.lightbg2 },
-    separator = ' ',
     separator_highlight = { colors.lightbg2, colors.bg },
   },
 }
@@ -147,7 +222,6 @@ gls.right[2] = {
     end,
     condition = require('galaxyline.provider_vcs').check_git_workspace,
     highlight = { colors.grey, colors.lightbg },
-    separator = '',
     separator_highlight = { colors.lightbg, colors.bg },
   },
 }
@@ -160,38 +234,11 @@ gls.right[3] = {
   },
 }
 
-gls.right[4] = {
-  viMode_icon = {
-    provider = function()
-      return ' '
-    end,
-    highlight = { colors.bg, colors.red },
-    separator = ' ',
-    separator_highlight = { colors.red, colors.lightbg },
-  },
-}
-
-gls.right[5] = {
-  ViMode = {
-    provider = function()
-      local current_Mode = mode_map[vim.fn.mode()]
-
-      if current_Mode == nil then
-        return '  Terminal '
-      else
-        return '  ' .. current_Mode .. ' '
-      end
-    end,
-    highlight = { colors.red, colors.lightbg },
-  },
-}
-
 gls.right[6] = {
   some_icon = {
     provider = function()
       return ' '
     end,
-    separator = '',
     separator_highlight = { colors.green, colors.lightbg },
     highlight = { colors.lightbg, colors.green },
   },
