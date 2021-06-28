@@ -8,7 +8,7 @@ return packer.startup(function()
   use('norcalli/nvim-colorizer.lua')
 
   use('akinsho/nvim-bufferline.lua')
-  use('glepnir/galaxyline.nvim')
+  use('hoob3rt/lualine.nvim')
 
   use('itchyny/vim-cursorword')
   use('justinmk/vim-sneak')
@@ -23,6 +23,7 @@ return packer.startup(function()
   use('windwp/nvim-autopairs')
   use('alvan/vim-closetag')
   use('hrsh7th/vim-vsnip')
+  use('folke/trouble.nvim')
 
   -- rust
   use('simrat39/rust-tools.nvim')
@@ -31,6 +32,7 @@ return packer.startup(function()
 
   use('kyazdani42/nvim-tree.lua')
   use('kyazdani42/nvim-web-devicons')
+  use('lewis6991/gitsigns.nvim')
   use('nvim-telescope/telescope.nvim')
   use('nvim-lua/popup.nvim')
   use('nvim-lua/plenary.nvim')

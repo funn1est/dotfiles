@@ -35,7 +35,7 @@ opt('timeoutlen', 300)
 opt('updatetime', 300)
 
 opt('shortmess', vim.o.shortmess .. 'c')
-opt('signcolumn', 'number')
+opt('signcolumn', 'yes')
 
 opt('undofile', true)
 
@@ -59,13 +59,15 @@ map('x', '<', '<gv')
 map('x', '>', '>gv')
 
 require('config.compe')
-require('config.galaxyline')
+require('config.gitsigns')
 require('config.indentline')
 require('config.lsp')
+require('config.lualine')
 require('config.nvim_bufferline')
 require('config.nvim_tree')
 require('config.nvim_treesitter')
 require('config.telescope')
+require('config.trouble')
 require('config.vim_sneak')
 
 require('colorizer').setup()
