@@ -39,6 +39,9 @@ opt('undofile', true)
 opt('listchars', 'nbsp:¬,eol:¶,extends:»,precedes:«,trail:•')
 
 map('n', '<C-s>', '<cmd>w<cr>')
+map('n', '<C-f>', '<Nop>')
+map('n', '<C-b>', '<Nop>')
+
 map('i', 'jj', '<esc>')
 --map('i', '<C-h>', '<left>')
 map('i', '<C-j>', '<down>')

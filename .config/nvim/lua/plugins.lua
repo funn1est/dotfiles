@@ -9,6 +9,7 @@ return packer.startup(function()
 
   use('akinsho/nvim-bufferline.lua')
   use('hoob3rt/lualine.nvim')
+  use('p00f/nvim-ts-rainbow')
 
   use('itchyny/vim-cursorword')
   use('justinmk/vim-sneak')

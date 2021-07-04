@@ -56,6 +56,6 @@ local opts = { noremap = true, silent = false }
 
 map('n', '<leader>ff', '<cmd>Telescope find_files<cr>', opts)
 map('n', '<leader>fb', '<cmd>Telescope buffers<cr>', opts)
+map('n', '<leader>fr', '<cmd>Telescope oldfiles<cr>', opts)
 map('n', '<leader>fg', '<cmd>Telescope live_grep<cr>', opts)
 map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', opts)
-map('n', '<leader>ga', '<cmd>Telescope lsp_code_actions<cr>', opts)

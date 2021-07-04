@@ -20,6 +20,17 @@ local n_mappings = {
   f = {
     name = '+file',
   },
+  g = {
+    name = 'Git',
+    f = { '<cmd>Telescope git_files<cr>', 'Git files' },
+    o = { '<cmd>Telescope git_status<cr>', 'Open changed file' },
+    b = { '<cmd>Telescope git_branches<cr>', 'Checkout branch' },
+    c = { '<cmd>Telescope git_commits<cr>', 'Checkout commit' },
+    C = {
+      '<cmd>Telescope git_bcommits<cr>',
+      'Checkout commit(for current file)',
+    },
+  },
   l = {
     name = '+LSP',
     a = { '<cmd>Lspsaga code_action<cr>', 'Code Action' },
