@@ -23,7 +23,20 @@ return packer.startup(function()
   use('windwp/nvim-autopairs')
   use('alvan/vim-closetag')
   use('hrsh7th/vim-vsnip')
+  use('rafamadriz/friendly-snippets')
   use('folke/trouble.nvim')
+  use('glepnir/lspsaga.nvim')
+
+  -- comment
+  use({
+    'terrortylor/nvim-comment',
+    opt = false,
+    config = function()
+      require('nvim_comment').setup({
+        create_mappings = false,
+      })
+    end,
+  })
 
   -- rust
   use('simrat39/rust-tools.nvim')
@@ -36,8 +49,10 @@ return packer.startup(function()
   use('nvim-telescope/telescope.nvim')
   use('nvim-lua/popup.nvim')
   use('nvim-lua/plenary.nvim')
+  use('glepnir/dashboard-nvim')
+  use('folke/which-key.nvim')
 
   -- misc
   use('tweekmonster/startuptime.vim')
-  use({ 'lukas-reineke/indent-blankline.nvim', branch = 'lua' })
+  use('lukas-reineke/indent-blankline.nvim')
 end)

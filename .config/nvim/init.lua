@@ -1,3 +1,5 @@
+vim.g.mapleader = ' '
+
 require('plugins')
 
 local base16 = require('base16')

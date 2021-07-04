@@ -1,31 +1,4 @@
 vim.o.completeopt = 'menuone,noselect'
-vim.lsp.protocol.CompletionItemKind = {
-  'ﮜ [text]',
-  ' [method]',
-  ' [function]',
-  ' [constructor]',
-  'ﰠ [field]',
-  ' [variable]',
-  ' [class]',
-  ' [interface]',
-  ' [module]',
-  ' [property]',
-  ' [unit]',
-  ' [value]',
-  ' [enum]',
-  ' [key]',
-  ' [snippet]',
-  ' [color]',
-  ' [file]',
-  ' [reference]',
-  ' [folder]',
-  ' [enum member]',
-  ' [constant]',
-  ' [struct]',
-  '⌘ [event]',
-  ' [operator]',
-  '⌂ [type]',
-}
 
 require('compe').setup({
   enabled = true,
@@ -41,12 +14,17 @@ require('compe').setup({
   max_menu_width = 100,
   documentation = true,
   source = {
+    path = true,
     buffer = { kind = '﬘', true },
+    calc = true,
     nvim_lsp = true,
+    nvim_lua = true,
     vsnip = true,
     tabnine = {
       max_num_results = 3,
     },
+    spell = true,
+    treesitter = false,
   },
 })
 
@@ -88,15 +66,19 @@ _G.s_tab_complete = function()
   end
 end
 
---  mappings
+_G.vsnip_expand_or_jump = function()
+  return t('<Plug>(vsnip-expand-or-jump)')
+end
 
+--  mappings
 local opts = { expr = true }
 vim.api.nvim_set_keymap('i', '<Tab>', 'v:lua.tab_complete()', opts)
 vim.api.nvim_set_keymap('s', '<Tab>', 'v:lua.tab_complete()', opts)
 vim.api.nvim_set_keymap('i', '<S-Tab>', 'v:lua.s_tab_complete()', opts)
 vim.api.nvim_set_keymap('s', '<S-Tab>', 'v:lua.s_tab_complete()', opts)
 vim.api.nvim_set_keymap('i', '<C-Space>', 'compe#complete()', opts)
-vim.api.nvim_set_keymap('i', '<C-c>', 'compe#close()', opts)
+vim.api.nvim_set_keymap('i', '<C-e>', 'compe#close()', opts)
+vim.api.nvim_set_keymap('i', '<C-d>', 'v:lua.vsnip_expand_or_jump()', opts)
 
 function _G.completions()
   local npairs = require('nvim-autopairs')

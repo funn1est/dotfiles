@@ -1,9 +1,6 @@
 local utils = require('utils')
 local opt = utils.opt
 local map = utils.map
-local g = vim.g
-
-g.mapleader = ' '
 
 opt('termguicolors', true)
 
@@ -41,15 +38,14 @@ opt('undofile', true)
 
 opt('listchars', 'nbsp:¬,eol:¶,extends:»,precedes:«,trail:•')
 
+map('n', '<C-s>', '<cmd>w<cr>')
 map('i', 'jj', '<esc>')
-map('i', '<C-h>', '<left>')
+--map('i', '<C-h>', '<left>')
 map('i', '<C-j>', '<down>')
 map('i', '<C-k>', '<up>')
-map('i', '<C-l>', '<right>')
+--map('i', '<C-l>', '<right>')
 map({ 'n', 'v' }, 'H', '^')
 map({ 'n', 'v' }, 'L', '$')
-map('n', '<cr>', 'G')
-map('n', '<bs>', 'gg')
 map('n', 'U', '<C-r>')
 map('n', 'Y', 'y$')
 map('n', '<leader>hl', '<cmd>nohls<cr>')
@@ -59,6 +55,7 @@ map('x', '<', '<gv')
 map('x', '>', '>gv')
 
 require('config.compe')
+require('config.dashboard')
 require('config.gitsigns')
 require('config.indentline')
 require('config.lsp')
@@ -69,6 +66,7 @@ require('config.nvim_treesitter')
 require('config.telescope')
 require('config.trouble')
 require('config.vim_sneak')
+require('config.which_key')
 
 require('colorizer').setup()
 require('nvim-autopairs').setup()
