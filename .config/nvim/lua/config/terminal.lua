@@ -1,3 +1,5 @@
+local map = require('utils').map
+
 require('toggleterm').setup({
   size = 15,
   hide_numbers = true,
@@ -9,3 +11,5 @@ require('toggleterm').setup({
   persist_size = true,
   direction = 'horizontal',
 })
+
+map('t', [[<esc><esc>]], [[<C-\><C-N>]])
