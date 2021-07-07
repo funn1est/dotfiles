@@ -12,4 +12,4 @@ require('toggleterm').setup({
   direction = 'horizontal',
 })
 
-map('t', [[<esc><esc>]], [[<C-\><C-N>]])
+map('t', 'jj', [[<C-\><C-N>]])

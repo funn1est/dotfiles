@@ -15,6 +15,7 @@ opt('number', true)
 opt('relativenumber', true)
 opt('cursorline', true)
 opt('scrolloff', 5)
+opt('cmdheight', 2)
 
 opt('splitright', true)
 opt('splitbelow', true)
@@ -78,7 +79,8 @@ require('config.telescope')
 require('config.treesitter')
 require('config.trouble')
 require('config.vim_sneak')
-require('config.which_key')
+
+require('keys')
 
 require('colorizer').setup()
 require('nvim-autopairs').setup()

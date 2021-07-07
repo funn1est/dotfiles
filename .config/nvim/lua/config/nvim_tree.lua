@@ -14,6 +14,13 @@ g.nvim_tree_git_hl = 1
 g.nvim_tree_root_folder_modifier = ':t'
 g.nvim_tree_tab_open = 0
 g.nvim_tree_allow_resize = 1
+g.nvim_tree_icons = {
+  git = {
+    unstaged = '',
+    staged = 'S',
+    untracked = 'U',
+  },
+}
 
 g.nvim_tree_show_icons = {
   git = 1,

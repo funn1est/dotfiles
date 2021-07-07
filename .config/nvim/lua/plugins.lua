@@ -6,7 +6,6 @@ return packer.startup(function()
 
   use('siduck76/nvim-base16.lua')
   use('norcalli/nvim-colorizer.lua')
-  use('p00f/nvim-ts-rainbow')
 
   use('akinsho/nvim-bufferline.lua')
   use('hoob3rt/lualine.nvim')
@@ -23,6 +22,7 @@ return packer.startup(function()
   use('glepnir/lspsaga.nvim')
   -- lang
   use('nvim-treesitter/nvim-treesitter')
+  use('p00f/nvim-ts-rainbow')
   use('windwp/nvim-autopairs')
   use('alvan/vim-closetag')
   use('hrsh7th/vim-vsnip')
