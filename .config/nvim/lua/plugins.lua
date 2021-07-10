@@ -10,7 +10,7 @@ return packer.startup(function()
   use('akinsho/nvim-bufferline.lua')
   use('hoob3rt/lualine.nvim')
 
-  use('itchyny/vim-cursorword')
+  use('RRethy/vim-illuminate')
   use('justinmk/vim-sneak')
   use('mg979/vim-visual-multi')
 

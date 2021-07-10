@@ -1,9 +1,6 @@
 local utils = require('utils')
-local base16 = require('base16')
 local opt = utils.opt
 local map = utils.map
-
-base16(base16.themes['onedark'], true)
 
 opt('termguicolors', true)
 

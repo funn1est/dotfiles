@@ -11,5 +11,3 @@ require('toggleterm').setup({
   persist_size = true,
   direction = 'horizontal',
 })
-
-map('t', 'jj', [[<C-\><C-N>]])

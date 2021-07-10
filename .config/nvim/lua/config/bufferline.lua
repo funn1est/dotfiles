@@ -1,4 +1,19 @@
 require('bufferline').setup({
+  highlights = {
+    indicator_selected = {
+      guibg = '#3e4451',
+      guifg = '#61afef',
+    },
+    buffer_selected = {
+      guibg = '#3e4451',
+    },
+    close_button_selected = {
+      guibg = '#3e4451',
+    },
+    modified_selected = {
+      guibg = '#3e4451',
+    },
+  },
   options = {
     offsets = { { filetype = 'NvimTree', text = '' } },
     show_tab_indicators = true,
@@ -6,7 +21,8 @@ require('bufferline').setup({
     show_buffer_close_icons = true,
     separator_style = 'thin',
     mappings = 'true',
-    diagnostics = 'nvim_lsp',
+    diagnostics = false,
+    --diagnostics = 'nvim_lsp',
     diagnostics_indicator = function(_, _, diagnostics_dict)
       local s = ' '
       for e, n in pairs(diagnostics_dict) do
