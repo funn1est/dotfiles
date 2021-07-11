@@ -2,10 +2,13 @@ local utils = require('utils')
 local opt = utils.opt
 local map = utils.map
 
+vim.cmd('syntax on')
+
 opt('termguicolors', true)
 
 opt('mouse', 'a')
 opt('clipboard', 'unnamedplus')
+opt('autoread', true)
 
 opt('hidden', true)
 opt('number', true)
