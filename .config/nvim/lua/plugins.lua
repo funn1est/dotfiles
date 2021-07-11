@@ -10,7 +10,13 @@ return packer.startup(function()
   use('akinsho/nvim-bufferline.lua')
   use('hoob3rt/lualine.nvim')
 
-  use('RRethy/vim-illuminate')
+  use({
+    'RRethy/vim-illuminate',
+    config = function()
+      vim.api.nvim_command('hi illuminatedWord cterm=underline gui=underline')
+      --vim.api.nvim_command('hi link illuminatedCurWord Search')
+    end,
+  })
   use('justinmk/vim-sneak')
   use('mg979/vim-visual-multi')
 

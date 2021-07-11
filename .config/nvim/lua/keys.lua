@@ -2,7 +2,11 @@ local utils = require('utils')
 local map = utils.map
 local wk = require('which-key')
 
-wk.setup({})
+wk.setup({
+  triggers_blacklist = {
+    n = { 'c', 'y' },
+  },
+})
 
 map('n', 'gp', '%')
 
@@ -90,8 +94,8 @@ local n_mappings = {
     r = { '<cmd>Lspsaga rename<cr>', 'Rename' },
     f = { '<cmd>lua vim.lsp.buf.formatting()<cr>', 'Format' },
     h = { '<cmd>Lspsaga hover_doc<cr>', 'Hover Doc' },
-    j = { '<cmd>Lspsaga diagnostic_jump_prev<cr>', 'Prev Diagnostic' },
-    k = { '<cmd>Lspsaga diagnostic_jump_next<cr>', 'Next Diagnostic' },
+    j = { '<cmd>Lspsaga diagnostic_jump_next<cr>', 'Next Diagnostic' },
+    k = { '<cmd>Lspsaga diagnostic_jump_prev<cr>', 'Prev Diagnostic' },
     l = { '<cmd>Lspsaga lsp_finder<cr>', 'LSP Finder' },
     L = { '<cmd>Lspsaga show_line_diagnostics<cr>', 'Line Diagnostics' },
     p = { '<cmd>Lspsaga preview_definition<cr>', 'Preview Definition' },

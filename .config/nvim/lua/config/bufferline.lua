@@ -1,19 +1,32 @@
+local normal_bg = '#3e4451'
+local selected_keys = {
+  'tab_selected',
+  'close_button_selected',
+  'buffer_selected',
+  'diagnostic_selected',
+  'info_selected',
+  'info_diagnostic_selected',
+  'warning_selected',
+  'warning_diagnostic_selected',
+  'error_selected',
+  'error_diagnostic_selected',
+  'modified_selected',
+  'duplicate_selected',
+  'separator_selected',
+  'indicator_selected',
+  'pick_selected',
+}
+
+local highlights = {}
+for _, key in ipairs(selected_keys) do
+  highlights[key] = {
+    guibg = normal_bg,
+  }
+end
+highlights.indicator_selected.guifg = '#61afef'
+
 require('bufferline').setup({
-  highlights = {
-    indicator_selected = {
-      guibg = '#3e4451',
-      guifg = '#61afef',
-    },
-    buffer_selected = {
-      guibg = '#3e4451',
-    },
-    close_button_selected = {
-      guibg = '#3e4451',
-    },
-    modified_selected = {
-      guibg = '#3e4451',
-    },
-  },
+  highlights = highlights,
   options = {
     offsets = { { filetype = 'NvimTree', text = '' } },
     show_tab_indicators = true,
