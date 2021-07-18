@@ -23,6 +23,8 @@ map('t', '<C-j>', [[<C-\><C-n><C-w>j]])
 map('t', '<C-k>', [[<C-\><C-n><C-w>k]])
 map('t', '<C-l>', [[<C-\><C-n><C-w>l]])
 
+map('n', 'K', '<cmd>Lspsaga hover_doc<cr>')
+
 local n_opts = {
   mode = 'n',
   prefix = '<leader>',
