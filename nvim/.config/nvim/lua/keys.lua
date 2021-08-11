@@ -8,13 +8,23 @@ wk.setup({
   },
 })
 
+map('n', ',p', '"0p', { noremap = false })
+map('n', ',P', '"0P', { noremap = false })
+
 map('n', 'gp', '%')
+
+map('n', 'n', 'nzzzv')
+map('n', 'N', 'Nzzzv')
+map('n', 'J', 'mzJ`z')
 
 map('n', '<C-h>', '<C-w>h')
 map('n', '<C-j>', '<C-w>j')
 map('n', '<C-k>', '<C-w>k')
 map('n', '<C-l>', '<C-w>l')
 map({ 'n', 'v' }, '<leader>/', ':CommentToggle<cr>')
+
+map('v', 'J', [[:m '>+1<CR>gv=gv]])
+map('v', 'K', [[:m '<-2<CR>gv=gv]])
 
 map('t', 'jj', [[<C-\><C-n>]])
 map('t', '<esc>', [[<C-\><C-n>]])
@@ -98,8 +108,7 @@ local n_mappings = {
     h = { '<cmd>Lspsaga hover_doc<cr>', 'Hover Doc' },
     j = { '<cmd>Lspsaga diagnostic_jump_next<cr>', 'Next Diagnostic' },
     k = { '<cmd>Lspsaga diagnostic_jump_prev<cr>', 'Prev Diagnostic' },
-    l = { '<cmd>Lspsaga lsp_finder<cr>', 'LSP Finder' },
-    L = { '<cmd>Lspsaga show_line_diagnostics<cr>', 'Line Diagnostics' },
+    l = { '<cmd>Lspsaga show_line_diagnostics<cr>', 'Line Diagnostics' },
     p = { '<cmd>Lspsaga preview_definition<cr>', 'Preview Definition' },
     q = { '<cmd>TroubleToggle quickfix<cr>', 'Quickfix' },
     t = { '<cmd>TroubleToggle<cr>', 'Trouble Toggle' },

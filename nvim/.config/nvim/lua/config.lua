@@ -46,7 +46,7 @@ opt('undofile', true)
 opt('listchars', 'nbsp:¬,eol:¶,extends:»,precedes:«,trail:•')
 
 map('n', '<leader>w', '<cmd>wa<cr>')
-map('n', '<C-s>', '<cmd>w<cr>')
+map('n', '<C-s>', '<cmd>up<cr>')
 map('n', '<C-f>', '<Nop>')
 map('n', '<C-b>', '<Nop>')
 
