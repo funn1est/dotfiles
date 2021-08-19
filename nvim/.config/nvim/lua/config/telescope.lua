@@ -28,7 +28,7 @@ require('telescope').setup({
       },
     },
     file_sorter = require('telescope.sorters').get_fuzzy_file,
-    file_ignore_patterns = {},
+    file_ignore_patterns = { 'node_modules/.*', 'target/.*' },
     generic_sorter = require('telescope.sorters').get_generic_fuzzy_sorter,
     path_display = { 'smart' },
     winblend = 0,
@@ -50,12 +50,3 @@ require('telescope').setup({
     },
   },
 })
-
-local map = require('utils').map
-local opts = { noremap = true, silent = false }
-
-map('n', '<leader>ff', '<cmd>Telescope find_files<cr>', opts)
-map('n', '<leader>fb', '<cmd>Telescope buffers<cr>', opts)
-map('n', '<leader>fr', '<cmd>Telescope oldfiles<cr>', opts)
-map('n', '<leader>fg', '<cmd>Telescope live_grep<cr>', opts)
-map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', opts)

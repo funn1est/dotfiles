@@ -57,20 +57,26 @@ local n_mappings = {
     K = { ':resize -5', 'expand-window-up' },
   },
   f = {
-    name = '+file',
+    name = 'Search',
+    f = { '<cmd>Telescope find_files<cr>', 'Find File' },
+    h = { '<cmd>Telescope help_tags<cr>', 'Find Help' },
+    m = { '<cmd>Telescope man_pages<cr>', 'Man Pages' },
+    r = { '<cmd>Telescope oldfiles<cr>', 'Open Recent File' },
+    R = { '<cmd>Telescope registers<cr>', 'Registers' },
+    g = { '<cmd>Telescope live_grep<cr>', 'Text' },
+    k = { '<cmd>Telescope keymaps<cr>', 'Keymaps' },
+    c = { '<cmd>Telescope commands<cr>', 'Commands' },
   },
-  h = {
-    name = '+help',
-    p = {
-      name = '+packer',
-      p = { '<cmd>PackerSync<cr>', 'Sync' },
-      s = { '<cmd>PackerStatus<cr>', 'Status' },
-      i = { '<cmd>PackerInstall<cr>', 'Install' },
-      c = { '<cmd>PackerCompile<cr>', 'Compile' },
-    },
+  p = {
+    name = 'Packer',
+    c = { '<cmd>PackerCompile<cr>', 'Compile' },
+    i = { '<cmd>PackerInstall<cr>', 'Install' },
+    s = { '<cmd>PackerSync<cr>', 'Sync' },
+    S = { '<cmd>PackerStatus<cr>', 'Status' },
+    u = { '<cmd>PackerUpdate<cr>', 'Update' },
   },
   g = {
-    name = '+git',
+    name = 'Git',
     l = { [[<cmd>lua require('gitsigns').blame_line()<cr>]], 'Blame' },
     j = { [[<cmd>lua require('gitsigns').next_hunk()<cr>]], 'Next Hunk' },
     k = { [[<cmd>lua require('gitsigns').prev_hunk()<cr>]], 'Prev Hunk' },
@@ -92,7 +98,7 @@ local n_mappings = {
     },
   },
   l = {
-    name = '+LSP',
+    name = 'LSP',
     a = { '<cmd>Lspsaga code_action<cr>', 'Code Action' },
     A = { '<cmd>Lspsaga range_code_action<cr>', 'Selected Action' },
     d = {
@@ -103,6 +109,7 @@ local n_mappings = {
       '<cmd>Trouble lsp_workspace_diagnostics<cr>',
       'Workspace Diagnostics',
     },
+    c = { [[<cmd>lua require('lspsaga.diagnostic').show_cursor_diagnostics()<cr>]], 'Cursor Diagnostics' },
     r = { '<cmd>Lspsaga rename<cr>', 'Rename' },
     f = { '<cmd>lua vim.lsp.buf.formatting()<cr>', 'Format' },
     h = { '<cmd>Lspsaga hover_doc<cr>', 'Hover Doc' },
@@ -129,7 +136,7 @@ local v_opts = {
 
 local v_mappings = {
   l = {
-    name = '+LSP',
+    name = 'LSP',
     a = { ':<C-U>Lspsaga range_code_action<cr>', 'Code Action' },
   },
 }
