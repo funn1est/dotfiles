@@ -1,5 +1,4 @@
-local lspconfig = require('lspconfig')
-local autocmd = require('utils').autocmd
+local coq = require('coq')
 
 require('config.lsp.diagnostics')
 require('config.lsp.handlers')
@@ -176,7 +175,7 @@ local function setup_servers()
     elseif settings[server] ~= nil then
       config.settings = settings[server]
     end
-    lspconf[server].setup(config)
+    lspconf[server].setup(coq.lsp_ensure_capabilities(config))
   end
 end
 

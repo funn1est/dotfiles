@@ -23,16 +23,16 @@ return packer.startup(function()
   -- lsp
   use('neovim/nvim-lspconfig')
   use('kabouzeid/nvim-lspinstall')
-  use('hrsh7th/nvim-compe')
-  use({ 'tzachar/compe-tabnine', run = './install.sh' })
   use('glepnir/lspsaga.nvim')
+  use({ 'ms-jpq/coq_nvim', branch = 'coq' })
+  use({ 'ms-jpq/coq.artifacts', branch = 'artifacts' })
   -- lang
   use('nvim-treesitter/nvim-treesitter')
   use('p00f/nvim-ts-rainbow')
   use('windwp/nvim-autopairs')
   use('alvan/vim-closetag')
-  use('hrsh7th/vim-vsnip')
-  use('rafamadriz/friendly-snippets')
+  --use('hrsh7th/vim-vsnip')
+  --use('rafamadriz/friendly-snippets')
   use('folke/trouble.nvim')
 
   -- comment

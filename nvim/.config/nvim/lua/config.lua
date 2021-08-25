@@ -38,6 +38,7 @@ opt('smartcase', true)
 opt('timeoutlen', 300)
 opt('updatetime', 300)
 
+opt('completeopt', 'menuone,noselect,noinsert')
 opt('shortmess', vim.o.shortmess .. 'c')
 opt('signcolumn', 'yes')
 
@@ -68,7 +69,8 @@ map('x', '<', '<gv')
 map('x', '>', '>gv')
 
 require('config.bufferline')
-require('config.compe')
+--require('config.compe')
+require('config.coq_nvim')
 require('config.dashboard')
 require('config.gitsigns')
 require('config.indentline')
