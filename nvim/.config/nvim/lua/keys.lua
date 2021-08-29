@@ -4,7 +4,7 @@ local wk = require('which-key')
 
 wk.setup({
   triggers_blacklist = {
-    n = { 'c', 'y', 'v', '@', '"' },
+    n = { 'c', 'y', 'v', 'd', '@', '"' },
   },
 })
 

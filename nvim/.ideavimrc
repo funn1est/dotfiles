@@ -65,12 +65,11 @@ nnoremap Y y$
 xnoremap < <gv
 xnoremap > >gv
 
-nnoremap ; :
+nnoremap gp %
 
 """ Leader
 " Comment lines
-nnoremap <leader>;; :action CommentByLineComment<CR>
-vnoremap <leader>;  :action CommentByLineComment<CR>
+nnoremap <leader>/ :action CommentByLineComment<CR>
 
 """ Files
 " Reload .ideavimrc
@@ -154,5 +153,5 @@ nnoremap g;         :action JumpToLastChange<CR>
 vnoremap g;         :action JumpToLastChange<CR>
 
 " Go to declaration
-nnoremap <leader>gd :action GotoDeclaration<CR>
-vnoremap <leader>gd <Esc>:action GotoDeclaration<CR>
+nnoremap gd :action GotoDeclaration<CR>
+vnoremap gd <Esc>:action GotoDeclaration<CR>

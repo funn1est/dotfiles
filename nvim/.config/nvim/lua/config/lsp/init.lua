@@ -1,4 +1,5 @@
 local coq = require('coq')
+local null_ls = require('config.lsp.null_ls')
 
 require('config.lsp.diagnostics')
 require('config.lsp.handlers')
@@ -63,13 +64,6 @@ end
 local function make_config()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
-  capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {
-      'documentation',
-      'detail',
-      'additionalTextEdits',
-    },
-  }
   return {
     -- enable snippet support
     capabilities = capabilities,
@@ -78,60 +72,20 @@ local function make_config()
   }
 end
 
-local lua_fmt = {
-  formatCommand = 'stylua --config-path ~/.config/stylua.toml -',
-  formatStdin = true,
-}
-local rust_fmt = {
-  formatCommand = 'rustfmt',
-  formatStdin = true,
-  lintCommand = 'cargo clippy',
-  lintSource = 'cargo',
-  lintFormats = { '%f:%l:%c: %m' },
-}
-
-local eslint_d = {
-  lintCommand = 'eslint_d -f visualstudio --stdin --stdin-filename ${INPUT}',
-  lintSource = 'eslint_d',
-  lintStdin = true,
-  lintFormats = { '%f(%l,%c): %tarning %m', '%f(%l,%c): %rror %m' },
-  lintIgnoreExitCode = true,
-  formatCommand = 'eslint_d --fix-to-stdout --stdin --stdin-filename ${INPUT}',
-  formatStdin = true,
-}
-
-local prettierd = {
-  formatCommand = 'prettier_d_slim --config-precedence prefer-file --stdin --stdin-filepath ${INPUT}',
-  formatStdin = true,
-}
-
-local languages = {
-  lua = { lua_fmt },
-  --rust = { rust_fmt},
-  javascript = { prettierd, eslint_d },
-  typescript = { prettierd, eslint_d },
-  javascriptreact = { prettierd, eslint_d },
-  typescriptreact = { prettierd, eslint_d },
-}
-
 local setups = {
-  efm = {
-    on_attach = on_attach,
-    init_options = { documentFormatting = true, codeAction = false },
-    filetypes = vim.tbl_keys(languages),
-    settings = {
-      rootMarkers = { '.git/' },
-      languages = languages,
-    },
-  },
   typescript = {
     on_attach = function(client)
       client.resolved_capabilities.document_formatting = false
+      client.resolved_capabilities.document_range_formatting = false
       require('nvim-lsp-ts-utils').setup({
-        -- formatting
-        enable_formatting = false,
-        formatter = 'prettier_d_slim',
-        formatter_config_fallback = 'eslint_d',
+        eslint_bin = 'eslint_d',
+        eslint_enable_diagnostics = true,
+        eslint_show_rule_id = true,
+        eslint_disable_if_no_config = true,
+        enable_formatting = true,
+        formatter = 'prettier',
+        formatter_config_fallback = 'eslint',
+        update_imports_on_move = true,
       })
       on_attach(client)
     end,
@@ -220,3 +174,5 @@ vim.fn.sign_define('LspDiagnosticsSignError', { text = '', numhl = 'LspDiagno
 vim.fn.sign_define('LspDiagnosticsSignWarning', { text = '', numhl = 'LspDiagnosticsDefaultWarning' })
 vim.fn.sign_define('LspDiagnosticsSignInformation', { text = '', numhl = 'LspDiagnosticsDefaultInformation' })
 vim.fn.sign_define('LspDiagnosticsSignHint', { text = '', numhl = 'LspDiagnosticsDefaultHint' })
+
+null_ls.setup(on_attach)

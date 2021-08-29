@@ -24,6 +24,7 @@ return packer.startup(function()
   use('neovim/nvim-lspconfig')
   use('kabouzeid/nvim-lspinstall')
   use('glepnir/lspsaga.nvim')
+  use('jose-elias-alvarez/null-ls.nvim')
   use({ 'ms-jpq/coq_nvim', branch = 'coq' })
   use({ 'ms-jpq/coq.artifacts', branch = 'artifacts' })
   -- lang
