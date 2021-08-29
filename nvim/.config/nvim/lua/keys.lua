@@ -58,7 +58,10 @@ local n_mappings = {
   },
   f = {
     name = 'Search',
-    f = { '<cmd>Telescope find_files<cr>', 'Find File' },
+    f = {
+      [[<cmd>lua require('telescope.builtin').find_files({ prompt_prefix = "🔍", find_command = { "rg", "--hidden", "--smart-case", "-g", "!{node_modules,.git}" ,"--files" } })<cr>]],
+      'Find File',
+    },
     h = { '<cmd>Telescope help_tags<cr>', 'Find Help' },
     m = { '<cmd>Telescope man_pages<cr>', 'Man Pages' },
     r = { '<cmd>Telescope oldfiles<cr>', 'Open Recent File' },
