@@ -4,10 +4,12 @@ local map = utils.map
 
 vim.cmd('syntax on')
 
-opt('termguicolors', true)
+vim.opt.completeopt = { 'menuone', 'noinsert' }
+vim.opt.clipboard:append('unnamedplus')
+vim.opt.shortmess:append('c')
 
+opt('termguicolors', true)
 opt('mouse', 'a')
-opt('clipboard', 'unnamedplus')
 opt('autoread', true)
 
 opt('hidden', true)
@@ -38,8 +40,7 @@ opt('smartcase', true)
 opt('timeoutlen', 300)
 opt('updatetime', 300)
 
-opt('completeopt', 'menuone,noselect,noinsert')
-opt('shortmess', vim.o.shortmess .. 'c')
+--opt('completeopt', 'menuone,noselect,noinsert')
 opt('signcolumn', 'yes')
 
 opt('undofile', true)
@@ -70,6 +71,7 @@ map('x', '>', '>gv')
 
 require('config.bufferline')
 --require('config.compe')
+require('config.nvim_cmp')
 require('config.coq_nvim')
 require('config.dashboard')
 require('config.gitsigns')

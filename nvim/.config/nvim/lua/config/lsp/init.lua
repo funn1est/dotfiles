@@ -1,4 +1,4 @@
-local coq = require('coq')
+--local coq = require('coq')
 local null_ls = require('config.lsp.null_ls')
 
 require('config.lsp.diagnostics')
@@ -129,7 +129,7 @@ local function setup_servers()
     elseif settings[server] ~= nil then
       config.settings = settings[server]
     end
-    lspconf[server].setup(coq.lsp_ensure_capabilities(config))
+    lspconf[server].setup(config)
   end
 end
 
