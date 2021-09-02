@@ -1,4 +1,5 @@
 local cmp = require('cmp')
+local luasnip = require('luasnip')
 
 local tabnine = require('cmp_tabnine.config')
 tabnine:setup({
@@ -13,20 +14,18 @@ local check_back_space = function()
 end
 
 cmp.setup({
-  completion = {
-    completeopt = 'menu,menuone,noinsert',
-  },
   sources = {
     { name = 'nvim_lsp' },
+    { name = 'luasnip' },
     { name = 'nvim_lua' },
     { name = 'buffer' },
     { name = 'path' },
-    { name = 'vsnip' },
+    --{ name = 'vsnip' },
     { name = 'cmp_tabnine' },
   },
   snippet = {
     expand = function(args)
-      vim.fn['vsnip#anonymous'](args.body)
+      luasnip.lsp_expand(args.body)
     end,
   },
   formatting = {
@@ -34,7 +33,8 @@ cmp.setup({
       vim_item.menu = ({
         buffer = '[Buffer]',
         nvim_lsp = '[LSP]',
-        vsnip = '[vsnip]',
+        --vsnip = '[vsnip]',
+        luasnip = '[Snip]',
         nvim_lua = '[Lua]',
         cmp_tabnine = '[T9]',
       })[entry.source.name]
@@ -73,37 +73,27 @@ cmp.setup({
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = function(fallback)
-      if vim.fn['vsnip#available']() == 1 then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>(vsnip-expand-or-jump)'), '')
-      elseif vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<CR>'), '')
-      else
-        fallback()
-      end
-    end,
+    ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.close(),
     ['<CR>'] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Insert,
-      --behavior = cmp.ConfirmBehavior.Replace,
+      --behavior = cmp.ConfirmBehavior.Insert,
+      behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     }),
     ['<Tab>'] = function(fallback)
       if vim.fn.pumvisible() == 1 then
         vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n')
-      elseif check_back_space() then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Tab>', true, true, true), 'n')
-      elseif vim.fn['vsnip#available']() == 1 then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>(vsnip-expand-or-jump)', true, true, true), '')
+      elseif luasnip.expand_or_jumpable() then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '')
       else
         fallback()
       end
     end,
     ['<S-Tab>'] = function(fallback)
-      if vim.fn['vsnip#jumpable']() == 1 then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<plug>(vsnip-jump-prev)'), '')
-      elseif vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-p>'), '')
+      if vim.fn.pumvisible() == 1 then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n')
+      elseif luasnip.jumpable(-1) then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '')
       else
         fallback()
       end

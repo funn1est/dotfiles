@@ -4,7 +4,7 @@ local map = utils.map
 
 vim.cmd('syntax on')
 
-vim.opt.completeopt = { 'menuone', 'noinsert' }
+vim.opt.completeopt = { 'menuone', 'noselect', 'noinsert' }
 vim.opt.clipboard:append('unnamedplus')
 vim.opt.shortmess:append('c')
 
