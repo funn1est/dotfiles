@@ -71,7 +71,7 @@ map('x', '>', '>gv')
 
 require('config.bufferline')
 --require('config.compe')
-require('config.nvim_cmp')
+--require('config.nvim_cmp')
 require('config.coq_nvim')
 require('config.dashboard')
 require('config.gitsigns')

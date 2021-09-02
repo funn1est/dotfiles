@@ -1,4 +1,4 @@
---local coq = require('coq')
+local coq = require('coq')
 local null_ls = require('config.lsp.null_ls')
 
 require('config.lsp.diagnostics')
@@ -63,7 +63,7 @@ end
 -- config that activates keymaps and enables snippet support
 local function make_config()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
   return {
     -- enable snippet support
     capabilities = capabilities,
@@ -129,7 +129,7 @@ local function setup_servers()
     elseif settings[server] ~= nil then
       config.settings = settings[server]
     end
-    lspconf[server].setup(config)
+    lspconf[server].setup(coq.lsp_ensure_capabilities(config))
   end
 end
 
@@ -139,7 +139,7 @@ require('rust-tools').setup({
   tools = {
     hover_with_actions = false,
   },
-  server = {
+  server = coq.lsp_ensure_capabilities({
     on_attach = on_attach,
     capabilities = make_config().capabilities,
     settings = {
@@ -160,7 +160,7 @@ require('rust-tools').setup({
         },
       },
     },
-  },
+  }),
 })
 
 -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim

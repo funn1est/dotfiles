@@ -3,6 +3,11 @@ vim.g.coq_settings = {
     recommended = false,
   },
   auto_start = 'shut-up',
+  display = {
+    pum = {
+      fast_close = false,
+    }
+  },
   clients = {
     tabnine = {
       enabled = true,

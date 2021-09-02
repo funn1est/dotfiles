@@ -25,26 +25,26 @@ return packer.startup(function()
   use('kabouzeid/nvim-lspinstall')
   use('glepnir/lspsaga.nvim')
   use('jose-elias-alvarez/null-ls.nvim')
-  --use({ 'ms-jpq/coq_nvim', branch = 'coq' })
-  --use({ 'ms-jpq/coq.artifacts', branch = 'artifacts' })
+  use({ 'ms-jpq/coq_nvim', branch = 'coq' })
+  use({ 'ms-jpq/coq.artifacts', branch = 'artifacts' })
   -- lang
   use('nvim-treesitter/nvim-treesitter')
   use('p00f/nvim-ts-rainbow')
   use('windwp/nvim-autopairs')
   use('alvan/vim-closetag')
 
-  use('hrsh7th/nvim-cmp')
-  use('hrsh7th/cmp-buffer')
-  use('hrsh7th/cmp-nvim-lua')
-  use('hrsh7th/cmp-nvim-lsp')
+  --use('hrsh7th/nvim-cmp')
+  --use('hrsh7th/cmp-buffer')
+  --use('hrsh7th/cmp-nvim-lua')
+  --use('hrsh7th/cmp-nvim-lsp')
   --use('hrsh7th/vim-vsnip')
   --use('hrsh7th/cmp-vsnip')
-  use('hrsh7th/cmp-path')
-  use({ 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' })
-  use('saadparwaiz1/cmp_luasnip')
-  use('L3MON4D3/LuaSnip') -- Snippets plugin
+  --use('hrsh7th/cmp-path')
+  --use({ 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' })
+  --use('saadparwaiz1/cmp_luasnip')
+  --use('L3MON4D3/LuaSnip') -- Snippets plugin
 
-  use('rafamadriz/friendly-snippets')
+  --use('rafamadriz/friendly-snippets')
   use('folke/trouble.nvim')
 
   -- comment
