@@ -116,6 +116,7 @@ theme.base = {
   LspDiagnosticsUnderlineHint = { style = 'undercurl', sp = c.hint }, -- Used to underline "Hint" diagnostics
 
   LspSignatureActiveParameter = { fg = c.orange },
+  LspCodeLens = { fg = c.comment },
 }
 
 util.syntax(theme.base)

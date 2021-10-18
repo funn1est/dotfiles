@@ -74,10 +74,12 @@ end
 
 local setups = {
   typescript = {
-    on_attach = function(client)
+    on_attach = function(client, bufnr)
       client.resolved_capabilities.document_formatting = false
       client.resolved_capabilities.document_range_formatting = false
-      require('nvim-lsp-ts-utils').setup({
+      on_attach(client, bufnr)
+      local ts_utils = require('nvim-lsp-ts-utils')
+      ts_utils.setup({
         eslint_bin = 'eslint_d',
         eslint_enable_diagnostics = true,
         eslint_show_rule_id = true,
@@ -87,7 +89,7 @@ local setups = {
         formatter_config_fallback = 'eslint',
         update_imports_on_move = true,
       })
-      on_attach(client)
+      ts_utils.setup_client(client)
     end,
     capabilities = make_config().capabilities,
   },
