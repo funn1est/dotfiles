@@ -1,3 +1,8 @@
+local remap = vim.api.nvim_set_keymap
+local npairs = require('nvim-autopairs')
+
+npairs.setup({ map_bs = false, map_cr = false })
+
 vim.g.coq_settings = {
   keymap = {
     recommended = false,
@@ -6,7 +11,7 @@ vim.g.coq_settings = {
   display = {
     pum = {
       fast_close = false,
-    }
+    },
   },
   clients = {
     tabnine = {
@@ -15,21 +20,32 @@ vim.g.coq_settings = {
   },
 }
 
-vim.api.nvim_set_keymap('i', '<Esc>', [[pumvisible() ? "\<C-e>\<Esc>" : "\<Esc>"]], { expr = true, noremap = true })
-vim.api.nvim_set_keymap('i', '<C-c>', [[pumvisible() ? "\<C-e>\<C-c>" : "\<C-c>"]], { expr = true, noremap = true })
-vim.api.nvim_set_keymap('i', '<BS>', [[pumvisible() ? "\<C-e>\<BS>" : "\<BS>"]], { expr = true, noremap = true })
-vim.api.nvim_set_keymap('i', '<Tab>', [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { expr = true, noremap = true })
-vim.api.nvim_set_keymap('i', '<S-Tab>', [[pumvisible() ? "\<C-p>" : "\<BS>"]], { expr = true, noremap = true })
+remap('i', '<esc>', [[pumvisible() ? "<c-e><esc>" : "<esc>"]], { expr = true, noremap = true })
+remap('i', '<c-c>', [[pumvisible() ? "<c-e><c-c>" : "<c-c>"]], { expr = true, noremap = true })
+remap('i', '<tab>', [[pumvisible() ? "<c-n>" : "<tab>"]], { expr = true, noremap = true })
+remap('i', '<s-tab>', [[pumvisible() ? "<c-p>" : "<bs>"]], { expr = true, noremap = true })
 
-function _G.CR()
+-- skip it, if you use another global object
+_G.MUtils = {}
+
+MUtils.CR = function()
   if vim.fn.pumvisible() ~= 0 then
-    if vim.fn.complete_info().selected ~= -1 then
-      return vim.api.nvim_replace_termcodes('<C-y>', true, true, true)
+    if vim.fn.complete_info({ 'selected' }).selected ~= -1 then
+      return npairs.esc('<c-y>')
     else
-      return vim.api.nvim_replace_termcodes('<C-e>', true, true, true) .. require('nvim-autopairs').autopairs_cr()
+      return npairs.esc('<c-e>') .. npairs.autopairs_cr()
     end
   else
-    return require('nvim-autopairs').autopairs_cr()
+    return npairs.autopairs_cr()
   end
 end
-vim.api.nvim_set_keymap('i', '<CR>', 'v:lua.CR()', { expr = true, noremap = true })
+remap('i', '<cr>', 'v:lua.MUtils.CR()', { expr = true, noremap = true })
+
+MUtils.BS = function()
+  if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info({ 'mode' }).mode == 'eval' then
+    return npairs.esc('<c-e>') .. npairs.autopairs_bs()
+  else
+    return npairs.autopairs_bs()
+  end
+end
+remap('i', '<bs>', 'v:lua.MUtils.BS()', { expr = true, noremap = true })

@@ -88,4 +88,4 @@ require('config.vim_sneak')
 require('keys')
 
 require('colorizer').setup()
-require('nvim-autopairs').setup()
+--require('nvim-autopairs').setup()

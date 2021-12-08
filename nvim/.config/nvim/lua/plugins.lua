@@ -21,8 +21,10 @@ return packer.startup(function()
   use('mg979/vim-visual-multi')
 
   -- lsp
-  use('neovim/nvim-lspconfig')
-  use('kabouzeid/nvim-lspinstall')
+  use({
+    'neovim/nvim-lspconfig',
+    'williamboman/nvim-lsp-installer',
+  })
   use('glepnir/lspsaga.nvim')
   use('jose-elias-alvarez/null-ls.nvim')
   use({ 'ms-jpq/coq_nvim', branch = 'coq' })
@@ -32,6 +34,9 @@ return packer.startup(function()
   use('p00f/nvim-ts-rainbow')
   use('windwp/nvim-autopairs')
   use('alvan/vim-closetag')
+
+  -- lua
+  use('folke/lua-dev.nvim')
 
   --use('hrsh7th/nvim-cmp')
   --use('hrsh7th/cmp-buffer')

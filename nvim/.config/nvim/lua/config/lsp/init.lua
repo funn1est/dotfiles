@@ -1,5 +1,6 @@
 local coq = require('coq')
 local null_ls = require('config.lsp.null_ls')
+local lsp_installer = require('nvim-lsp-installer')
 
 require('config.lsp.diagnostics')
 require('config.lsp.handlers')
@@ -95,86 +96,42 @@ local setups = {
   },
 }
 
-local settings = {
-  lua = {
+local server_opts = {}
+
+server_opts['sumneko_lua'] = vim.tbl_deep_extend('force', require('lua-dev').setup({}), {
+  settings = {
     Lua = {
-      runtime = {
-        -- LuaJIT in the case of Neovim
-        version = 'LuaJIT',
-        path = vim.split(package.path, ';'),
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { 'vim' },
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = {
-          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-        },
-      },
+      completion = { callSnippet = 'Disable' },
+      workspace = { maxPreload = 2000 },
     },
   },
-}
-
-local function setup_servers()
-  require('lspinstall').setup()
-
-  local lspconf = require('lspconfig')
-  local servers = require('lspinstall').installed_servers()
-
-  for _, server in pairs(servers) do
-    local config = make_config()
-    if setups[server] ~= nil then
-      config = setups[server]
-    elseif settings[server] ~= nil then
-      config.settings = settings[server]
-    end
-    lspconf[server].setup(coq.lsp_ensure_capabilities(config))
-  end
-end
-
-setup_servers()
-
-require('rust-tools').setup({
-  tools = {
-    hover_with_actions = false,
-  },
-  server = coq.lsp_ensure_capabilities({
-    on_attach = on_attach,
-    capabilities = make_config().capabilities,
-    settings = {
-      ['rust-analyzer'] = {
-        cargo = {
-          allFeatures = true,
-        },
-        checkOnSave = {
-          allFeatures = true,
-          overrideCommand = {
-            'cargo',
-            'clippy',
-            '--workspace',
-            '--message-format=json',
-            '--all-targets',
-            '--all-features',
-          },
-        },
-      },
-    },
-  }),
 })
 
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require('lspinstall').post_install_hook = function()
-  setup_servers() -- reload installed servers
-  vim.cmd('bufdo e')
-end
+lsp_installer.on_server_ready(function(server)
+  local opts = make_config()
+
+  opts = vim.tbl_deep_extend('error', opts, server_opts[server.name] or {})
+
+  if server.name == 'rust_analyzer' then
+    -- Initialize the LSP via rust-tools instead
+    require('rust-tools').setup({
+      -- The "server" property provided in rust-tools setup function are the
+      -- settings rust-tools will provide to lspconfig during init.            --
+      -- We merge the necessary settings from nvim-lsp-installer (server:get_default_options())
+      -- with the user's own settings (opts).
+      server = vim.tbl_deep_extend('force', server:get_default_options(), opts),
+    })
+    server:attach_buffers()
+  else
+    server:setup(coq.lsp_ensure_capabilities(opts))
+  end
+  vim.cmd([[ do User LspAttachBuffers ]])
+end)
 
 -- replace the default lsp diagnostic letters with prettier symbols
-vim.fn.sign_define('LspDiagnosticsSignError', { text = '', numhl = 'LspDiagnosticsDefaultError' })
-vim.fn.sign_define('LspDiagnosticsSignWarning', { text = '', numhl = 'LspDiagnosticsDefaultWarning' })
-vim.fn.sign_define('LspDiagnosticsSignInformation', { text = '', numhl = 'LspDiagnosticsDefaultInformation' })
-vim.fn.sign_define('LspDiagnosticsSignHint', { text = '', numhl = 'LspDiagnosticsDefaultHint' })
+vim.fn.sign_define('DiagnosticSignError', { text = '', numhl = 'DiagnosticSignError' })
+vim.fn.sign_define('DiagnosticSignWarn', { text = '', numhl = 'DiagnosticSignWarn' })
+vim.fn.sign_define('DiagnosticSignInfo', { text = '', numhl = 'DiagnosticSignInfo' })
+vim.fn.sign_define('DiagnosticSignHint', { text = '', numhl = 'DiagnosticSignHint' })
 
 null_ls.setup(on_attach)
