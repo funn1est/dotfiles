@@ -1,14 +1,38 @@
 local packer = require('packer')
-local use = packer.use
 
-return packer.startup(function()
+vim.cmd('packadd packer.nvim')
+
+return packer.startup(function(use)
   use('wbthomason/packer.nvim')
+
+  local config = function(name)
+    return string.format([[require('config.%s')]], name)
+  end
+  local use_with_config = function(path, name)
+    use({ path, config = config(name) })
+  end
 
   use('siduck76/nvim-base16.lua')
   use('norcalli/nvim-colorizer.lua')
 
-  use('akinsho/nvim-bufferline.lua')
-  use('hoob3rt/lualine.nvim')
+  -- icons
+  use({
+    'kyazdani42/nvim-web-devicons',
+    config = function()
+      require('nvim-web-devicons').setup({ default = true })
+    end,
+  })
+
+  use({
+    'akinsho/nvim-bufferline.lua',
+    event = 'BufReadPre',
+    config = config('bufferline'),
+  })
+  use({
+    'nvim-lualine/lualine.nvim',
+    event = 'VimEnter',
+    config = config('lualine'),
+  })
 
   use({
     'RRethy/vim-illuminate',
@@ -17,7 +41,7 @@ return packer.startup(function()
       --vim.api.nvim_command('hi link illuminatedCurWord Search')
     end,
   })
-  use('justinmk/vim-sneak')
+  use_with_config('justinmk/vim-sneak', 'vim_sneak')
   use('mg979/vim-visual-multi')
 
   -- lsp
@@ -30,8 +54,18 @@ return packer.startup(function()
   use({ 'ms-jpq/coq_nvim', branch = 'coq' })
   use({ 'ms-jpq/coq.artifacts', branch = 'artifacts' })
   -- lang
-  use('nvim-treesitter/nvim-treesitter')
-  use('p00f/nvim-ts-rainbow')
+  use({
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    opt = true,
+    event = 'BufRead',
+    requires = {
+      'p00f/nvim-ts-rainbow',
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      'RRethy/nvim-treesitter-textsubjects',
+    },
+    config = config('treesitter'),
+  })
   use('windwp/nvim-autopairs')
   use('alvan/vim-closetag')
 
@@ -50,7 +84,18 @@ return packer.startup(function()
   --use('L3MON4D3/LuaSnip') -- Snippets plugin
 
   --use('rafamadriz/friendly-snippets')
-  use('folke/trouble.nvim')
+  --
+  use({
+    'folke/trouble.nvim',
+    event = 'BufReadPre',
+    cmd = { 'TroubleToggle', 'Trouble' },
+    config = function()
+      require('trouble').setup({
+        auto_open = false,
+        use_diagnostic_signs = true,
+      })
+    end,
+  })
 
   -- comment
   use({
@@ -68,14 +113,17 @@ return packer.startup(function()
   -- ts
   use('jose-elias-alvarez/nvim-lsp-ts-utils')
 
-  use('kyazdani42/nvim-tree.lua')
-  use('kyazdani42/nvim-web-devicons')
-  use('lewis6991/gitsigns.nvim')
-  use('nvim-telescope/telescope.nvim')
-  use('glepnir/dashboard-nvim')
+  use_with_config('kyazdani42/nvim-tree.lua', 'nvim_tree')
+  use_with_config('lewis6991/gitsigns.nvim', 'gitsigns')
+  use_with_config('nvim-telescope/telescope.nvim', 'telescope')
+  use_with_config('glepnir/dashboard-nvim', 'dashboard')
   use('folke/which-key.nvim')
-  use('lukas-reineke/indent-blankline.nvim')
-  use('akinsho/nvim-toggleterm.lua')
+  use({
+    'lukas-reineke/indent-blankline.nvim',
+    event = 'BufReadPre',
+    config = config('indent_blankline'),
+  })
+  use_with_config('akinsho/nvim-toggleterm.lua', 'terminal')
 
   -- misc
   use('tweekmonster/startuptime.vim')
