@@ -1,8 +1,16 @@
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+vim.diagnostic.config({
   underline = true,
   update_in_insert = false,
   virtual_text = { spacing = 4, prefix = '●' },
   severity_sort = true,
+  float = {
+    focusable = false,
+    style = 'minimal',
+    border = 'rounded',
+    source = 'always',
+    header = '',
+    prefix = '',
+  },
 })
 
 local signs = { Error = ' ', Warning = ' ', Hint = ' ', Information = ' ' }

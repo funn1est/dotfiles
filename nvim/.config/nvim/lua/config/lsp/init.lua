@@ -5,7 +5,6 @@ local lsp_installer = require('nvim-lsp-installer')
 require('config.lsp.diagnostics')
 require('config.lsp.handlers')
 require('config.lsp.kind')
-require('config.lsp.saga')
 
 -- keymaps
 local on_attach = function(client, bufnr)

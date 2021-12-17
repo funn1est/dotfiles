@@ -12,6 +12,7 @@ return packer.startup(function(use)
     use({ path, config = config(name) })
   end
 
+  -- theme
   use('siduck76/nvim-base16.lua')
   use('norcalli/nvim-colorizer.lua')
 
@@ -49,7 +50,6 @@ return packer.startup(function(use)
     'neovim/nvim-lspconfig',
     'williamboman/nvim-lsp-installer',
   })
-  use('glepnir/lspsaga.nvim')
   use('jose-elias-alvarez/null-ls.nvim')
   use({ 'ms-jpq/coq_nvim', branch = 'coq' })
   use({ 'ms-jpq/coq.artifacts', branch = 'artifacts' })

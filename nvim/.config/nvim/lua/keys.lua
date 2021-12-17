@@ -102,8 +102,8 @@ local n_mappings = {
   },
   l = {
     name = 'LSP',
-    a = { '<cmd>Lspsaga code_action<cr>', 'Code Action' },
-    A = { '<cmd>Lspsaga range_code_action<cr>', 'Selected Action' },
+    a = { [[<cmd>lua require('telescope.builtin').lsp_code_actions()<cr>]], 'Code Action' },
+    A = { [[<cmd>lua require('telescope.builtin').lsp_range_code_actions()<cr>]], 'Selected Action' },
     d = {
       '<cmd>Trouble lsp_document_diagnostics<cr>',
       'Document Diagnostics',
@@ -112,14 +112,20 @@ local n_mappings = {
       '<cmd>Trouble lsp_workspace_diagnostics<cr>',
       'Workspace Diagnostics',
     },
-    c = { [[<cmd>lua require('lspsaga.diagnostic').show_cursor_diagnostics()<cr>]], 'Cursor Diagnostics' },
-    r = { '<cmd>Lspsaga rename<cr>', 'Rename' },
+    c = { [[<cmd>Telescope diagnostics bufnr=0<cr>]], 'Cursor Diagnostics' },
+    r = { '<cmd>lua vim.lsp.buf.rename()<cr>', 'Rename' },
     f = { '<cmd>lua vim.lsp.buf.formatting()<cr>', 'Format' },
-    h = { '<cmd>Lspsaga hover_doc<cr>', 'Hover Doc' },
-    j = { '<cmd>Lspsaga diagnostic_jump_next<cr>', 'Next Diagnostic' },
-    k = { '<cmd>Lspsaga diagnostic_jump_prev<cr>', 'Prev Diagnostic' },
-    l = { '<cmd>Lspsaga show_line_diagnostics<cr>', 'Line Diagnostics' },
-    p = { '<cmd>Lspsaga preview_definition<cr>', 'Preview Definition' },
+    h = { '<cmd>lua vim.lsp.buf.hover()<cr>', 'Hover Doc' },
+    j = {
+      '<cmd>lua vim.diagnostic.goto_next()<CR>',
+      'Next Diagnostic',
+    },
+    k = {
+      '<cmd>lua vim.diagnostic.goto_prev()<cr>',
+      'Prev Diagnostic',
+    },
+    l = { [[<cmd>lua vim.diagnostic.open_float(nil, { scope = "line", })<cr>]], 'Line Diagnostics' },
+    p = { [[<cmd>lua require("telescope.builtin").lsp_definitions()<cr>]], 'Preview Definition' },
     q = { '<cmd>TroubleToggle quickfix<cr>', 'Quickfix' },
     t = { '<cmd>TroubleToggle<cr>', 'Trouble Toggle' },
     i = { '<cmd>TroubleToggle lsp_references<cr>', 'references' },
@@ -140,7 +146,7 @@ local v_opts = {
 local v_mappings = {
   l = {
     name = 'LSP',
-    a = { ':<C-U>Lspsaga range_code_action<cr>', 'Code Action' },
+    a = { [[<cmd>lua require('telescope.builtin').lsp_range_code_actions()<cr>]], 'Code Action' },
   },
 }
 
