@@ -46,13 +46,41 @@ return packer.startup(function(use)
   use('mg979/vim-visual-multi')
 
   -- lsp
+  use('williamboman/nvim-lsp-installer')
   use({
     'neovim/nvim-lspconfig',
-    'williamboman/nvim-lsp-installer',
+    config = config('lsp'),
+    after = 'nvim-cmp',
   })
   use('jose-elias-alvarez/null-ls.nvim')
-  use({ 'ms-jpq/coq_nvim', branch = 'coq' })
-  use({ 'ms-jpq/coq.artifacts', branch = 'artifacts' })
+
+  use({
+    'hrsh7th/nvim-cmp',
+    config = config('nvim_cmp'),
+    requires = {
+      {
+        'L3MON4D3/LuaSnip',
+        config = function()
+          -- require('cosmic.plugins.luasnip')
+        end,
+        requires = {
+          'rafamadriz/friendly-snippets',
+        },
+      },
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'hrsh7th/cmp-buffer' },
+      { 'hrsh7th/cmp-nvim-lua' },
+      { 'hrsh7th/cmp-path' },
+      { 'tzachar/cmp-tabnine', run = './install.sh' },
+      { 'saadparwaiz1/cmp_luasnip' },
+    },
+  })
+  --use('hrsh7th/vim-vsnip')
+  --use('hrsh7th/cmp-vsnip')
+
+  -- use({ 'ms-jpq/coq_nvim', branch = 'coq' })
+  -- use({ 'ms-jpq/coq.artifacts', branch = 'artifacts' })
+
   -- lang
   use({
     'nvim-treesitter/nvim-treesitter',
@@ -72,19 +100,6 @@ return packer.startup(function(use)
   -- lua
   use('folke/lua-dev.nvim')
 
-  --use('hrsh7th/nvim-cmp')
-  --use('hrsh7th/cmp-buffer')
-  --use('hrsh7th/cmp-nvim-lua')
-  --use('hrsh7th/cmp-nvim-lsp')
-  --use('hrsh7th/vim-vsnip')
-  --use('hrsh7th/cmp-vsnip')
-  --use('hrsh7th/cmp-path')
-  --use({ 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' })
-  --use('saadparwaiz1/cmp_luasnip')
-  --use('L3MON4D3/LuaSnip') -- Snippets plugin
-
-  --use('rafamadriz/friendly-snippets')
-  --
   use({
     'folke/trouble.nvim',
     event = 'BufReadPre',

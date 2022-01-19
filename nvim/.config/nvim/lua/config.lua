@@ -4,7 +4,7 @@ local map = utils.map
 
 vim.cmd('syntax on')
 
-vim.opt.completeopt = { 'menuone', 'noselect', 'noinsert' }
+vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 vim.opt.clipboard:append('unnamedplus')
 vim.opt.shortmess:append('c')
 
@@ -71,8 +71,8 @@ map('x', '>', '>gv')
 
 --require('config.compe')
 --require('config.nvim_cmp')
-require('config.coq_nvim')
-require('config.lsp')
+--require('config.coq_nvim')
+--require('config.lsp')
 
 require('keys')
 
