@@ -1,3 +1,4 @@
+local coq = require('coq')
 local null_ls = require('config.lsp.null_ls')
 local lsp_installer = require('nvim-lsp-installer')
 
@@ -61,8 +62,8 @@ end
 
 -- config that activates keymaps and enables snippet support
 local function make_config()
-  -- local capabilities = vim.lsp.protocol.make_client_capabilities()
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  -- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   return {
     -- enable snippet support
@@ -122,7 +123,8 @@ lsp_installer.on_server_ready(function(server)
     })
     server:attach_buffers()
   else
-    server:setup(opts)
+    -- server:setup(opts)
+    server:setup(coq.lsp_ensure_capabilities(opts))
   end
   vim.cmd([[ do User LspAttachBuffers ]])
 end)
