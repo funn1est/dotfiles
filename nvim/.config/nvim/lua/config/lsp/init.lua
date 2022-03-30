@@ -1,4 +1,4 @@
-local coq = require('coq')
+-- local coq = require('coq')
 local null_ls = require('config.lsp.null_ls')
 local lsp_installer = require('nvim-lsp-installer')
 
@@ -62,8 +62,8 @@ end
 
 -- config that activates keymaps and enables snippet support
 local function make_config()
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  -- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  --local capabilities = vim.lsp.protocol.make_client_capabilities()
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   return {
     -- enable snippet support
@@ -111,6 +111,7 @@ lsp_installer.on_server_ready(function(server)
   local opts = make_config()
 
   opts = vim.tbl_deep_extend('error', opts, server_opts[server.name] or {})
+  -- opts = coq.lsp_ensure_capabilities(opts)
 
   if server.name == 'rust_analyzer' then
     -- Initialize the LSP via rust-tools instead
@@ -122,9 +123,69 @@ lsp_installer.on_server_ready(function(server)
       server = vim.tbl_deep_extend('force', server:get_default_options(), opts),
     })
     server:attach_buffers()
+  elseif server.name == 'tsserver' then
+    opts.on_attach = function(client, bufnr)
+      client.resolved_capabilities.document_formatting = false
+      client.resolved_capabilities.document_range_formatting = false
+      on_attach(client, bufnr)
+
+      local ts_utils = require('nvim-lsp-ts-utils')
+
+      -- defaults
+      ts_utils.setup({
+        debug = false,
+        disable_commands = false,
+        enable_import_on_completion = false,
+        enable_formatting = false,
+
+        -- import all
+        import_all_timeout = 5000, -- ms
+        -- lower numbers = higher priority
+        import_all_priorities = {
+          same_file = 1, -- add to existing import statement
+          local_files = 2, -- git files or files with relative path markers
+          buffer_content = 3, -- loaded buffer content
+          buffers = 4, -- loaded buffer names
+        },
+        import_all_scan_buffers = 100,
+        import_all_select_source = false,
+        -- if false will avoid organizing imports
+        always_organize_imports = true,
+
+        -- filter diagnostics
+        filter_out_diagnostics_by_severity = {},
+        filter_out_diagnostics_by_code = {},
+
+        -- inlay hints
+        auto_inlay_hints = true,
+        inlay_hints_highlight = 'Comment',
+        inlay_hints_priority = 200, -- priority of the hint extmarks
+        inlay_hints_throttle = 150, -- throttle the inlay hint request
+        inlay_hints_format = { -- format options for individual hint kind
+          Type = {},
+          Parameter = {},
+          Enum = {},
+          -- Example format customization for `Type` kind:
+          -- Type = {
+          --     highlight = "Comment",
+          --     text = function(text)
+          --         return "->" .. text:sub(2)
+          --     end,
+          -- },
+        },
+
+        -- update imports on file move
+        update_imports_on_move = false,
+        require_confirmation_on_move = false,
+        watch_dir = nil,
+      })
+
+      -- required to fix code action ranges and filter diagnostics
+      ts_utils.setup_client(client)
+    end
+    server:setup(opts)
   else
-    -- server:setup(opts)
-    server:setup(coq.lsp_ensure_capabilities(opts))
+    server:setup(opts)
   end
   vim.cmd([[ do User LspAttachBuffers ]])
 end)

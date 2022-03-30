@@ -5,6 +5,7 @@ local sources = {
   --b.formatting.prettierd.with({
   --  filetypes = { 'html', 'json', 'yaml', 'markdown' },
   --}),
+  b.formatting.prettier,
   b.formatting.stylua.with({
     args = { '--config-path', vim.fn.expand('~/.config/stylua.toml'), '--stdin-filepath', '$FILENAME', '-' },
   }),

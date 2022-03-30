@@ -1,12 +1,11 @@
 local cmp = require('cmp')
-local luasnip = require('luasnip')
 
-local tabnine = require('cmp_tabnine.config')
-tabnine:setup({
-  max_lines = 1000,
-  max_num_results = 3,
-  sort = true,
-})
+-- local tabnine = require('cmp_tabnine.config')
+-- tabnine:setup({
+--   max_lines = 1000,
+--   max_num_results = 3,
+--   sort = true,
+-- })
 
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -16,9 +15,7 @@ end
 cmp.setup({
   snippet = {
     expand = function(args)
-      -- vim.fn['vsnip#anonymous'](args.body) -- For `vsnip` users.
       require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-      -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
     end,
   },
   sources = {
@@ -27,7 +24,6 @@ cmp.setup({
     { name = 'nvim_lua' },
     { name = 'buffer' },
     { name = 'path' },
-    --{ name = 'vsnip' },
     { name = 'cmp_tabnine' },
   },
   formatting = {
@@ -36,7 +32,6 @@ cmp.setup({
       vim_item.menu = ({
         buffer = '[Buffer]',
         nvim_lsp = '[LSP]',
-        --vsnip = '[vsnip]',
         luasnip = '[Snip]',
         nvim_lua = '[Lua]',
         cmp_tabnine = '[T9]',
@@ -89,6 +84,7 @@ cmp.setup({
     }),
     ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     ['<Tab>'] = cmp.mapping(function(fallback)
+      local luasnip = require('luasnip')
       if cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expand_or_jumpable() then
@@ -103,6 +99,7 @@ cmp.setup({
       's',
     }),
     ['<S-Tab>'] = cmp.mapping(function(fallback)
+      local luasnip = require('luasnip')
       if cmp.visible() then
         cmp.select_prev_item()
       elseif luasnip.jumpable(-1) then

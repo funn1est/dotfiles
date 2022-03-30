@@ -51,35 +51,34 @@ return packer.startup(function(use)
     'neovim/nvim-lspconfig',
     config = config('lsp'),
     --after = 'nvim-cmp',
+    after = 'cmp-nvim-lsp',
   })
   use('jose-elias-alvarez/null-ls.nvim')
 
-  -- use({
-  --   'hrsh7th/nvim-cmp',
-  --   config = config('nvim_cmp'),
-  --   requires = {
-  --     {
-  --       'L3MON4D3/LuaSnip',
-  --       config = function()
-  --         -- require('cosmic.plugins.luasnip')
-  --       end,
-  --       requires = {
-  --         'rafamadriz/friendly-snippets',
-  --       },
-  --     },
-  --     { 'hrsh7th/cmp-nvim-lsp' },
-  --     { 'hrsh7th/cmp-buffer' },
-  --     { 'hrsh7th/cmp-nvim-lua' },
-  --     { 'hrsh7th/cmp-path' },
-  --     { 'tzachar/cmp-tabnine', run = './install.sh' },
-  --     { 'saadparwaiz1/cmp_luasnip' },
-  --   },
-  -- })
-  --use('hrsh7th/vim-vsnip')
-  --use('hrsh7th/cmp-vsnip')
+  use({
+    'hrsh7th/nvim-cmp',
+    config = config('nvim_cmp'),
+    event = 'InsertEnter',
+    requires = {
+      {
+        'L3MON4D3/LuaSnip',
+        config = config('luasnip'),
+        after = 'nvim-cmp',
+        requires = {
+          'rafamadriz/friendly-snippets',
+        },
+      },
+      { 'saadparwaiz1/cmp_luasnip', after = 'LuaSnip' },
+      { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
+      { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
+      { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
+      { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+      { 'tzachar/cmp-tabnine', run = './install.sh', after = 'nvim-cmp' },
+    },
+  })
 
-  use({ 'ms-jpq/coq_nvim', branch = 'coq', config = config('coq_nvim') })
-  use({ 'ms-jpq/coq.artifacts', branch = 'artifacts' })
+  -- use({ 'ms-jpq/coq_nvim', branch = 'coq', config = config('coq_nvim') })
+  -- use({ 'ms-jpq/coq.artifacts', branch = 'artifacts' })
 
   -- lang
   use({
