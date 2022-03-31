@@ -15,7 +15,7 @@ map('n', 'gp', '%')
 
 map('n', 'n', 'nzzzv')
 map('n', 'N', 'Nzzzv')
-map('n', 'J', 'mzJ`z')
+-- map('n', 'J', 'mzJ`z')
 
 map('n', '<C-h>', '<C-w>h')
 map('n', '<C-j>', '<C-w>j')
@@ -23,8 +23,8 @@ map('n', '<C-k>', '<C-w>k')
 map('n', '<C-l>', '<C-w>l')
 map({ 'n', 'v' }, '<leader>/', ':CommentToggle<cr>')
 
-map('v', 'J', [[:m '>+1<CR>gv=gv]])
-map('v', 'K', [[:m '<-2<CR>gv=gv]])
+-- map('v', 'J', [[:m '>+1<CR>gv=gv]])
+-- map('v', 'K', [[:m '<-2<CR>gv=gv]])
 
 map('t', 'jj', [[<C-\><C-n>]])
 map('t', '<esc>', [[<C-\><C-n>]])

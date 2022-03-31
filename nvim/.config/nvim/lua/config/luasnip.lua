@@ -29,16 +29,16 @@ ls.config.set_config({
     --     virt_text = { { 'choiceNode', 'Comment' } },
     --   },
     -- },
-    [types.choiceNode] = {
-      active = {
-        virt_text = { { '●', 'GruvboxOrange' } },
-      },
-    },
-    [types.insertNode] = {
-      active = {
-        virt_text = { { '●', 'GruvboxBlue' } },
-      },
-    },
+    -- [types.choiceNode] = {
+    --   active = {
+    --     virt_text = { { '●', 'GruvboxOrange' } },
+    --   },
+    -- },
+    -- [types.insertNode] = {
+    --   active = {
+    --     virt_text = { { '●', 'GruvboxBlue' } },
+    --   },
+    -- },
   },
   -- treesitter-hl has 100, use something higher (default is 200).
   ext_base_prio = 300,
