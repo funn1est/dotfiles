@@ -69,12 +69,11 @@ map('n', '<leader>ik', 'O<esc>j')
 map('x', '<', '<gv')
 map('x', '>', '>gv')
 
---require('config.compe')
---require('config.nvim_cmp')
---require('config.coq_nvim')
---require('config.lsp')
+map('x', '<leader>p', '"_dP')
+map({ 'n', 'v' }, '<leader>y', '"+y')
+map({ 'n', 'v' }, '<leader>d', '"_d')
+map('n', '<leader>Y', '"+Y', { noremap = false })
 
 require('keys')
 
 require('colorizer').setup()
---require('nvim-autopairs').setup()
