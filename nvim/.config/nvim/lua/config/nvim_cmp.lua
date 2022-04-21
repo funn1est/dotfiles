@@ -70,8 +70,8 @@ cmp.setup({
     behavior = cmp.ConfirmBehavior.Replace,
     select = false,
   },
-  documentation = {
-    border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+  window = {
+    documentation = cmp.config.window.bordered(),
   },
   mapping = {
     ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
@@ -118,6 +118,8 @@ cmp.setup({
   },
   experimental = {
     ghost_text = false,
+  },
+  view = {
     native_menu = false,
   },
 })

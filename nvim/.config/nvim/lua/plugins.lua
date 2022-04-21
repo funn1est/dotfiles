@@ -25,7 +25,7 @@ return packer.startup(function(use)
   })
 
   use({
-    'akinsho/nvim-bufferline.lua',
+    'akinsho/bufferline.nvim',
     event = 'BufReadPre',
     config = config('bufferline'),
   })
@@ -143,7 +143,7 @@ return packer.startup(function(use)
     event = 'BufReadPre',
     config = config('indent_blankline'),
   })
-  use_with_config('akinsho/nvim-toggleterm.lua', 'terminal')
+  use_with_config('akinsho/toggleterm.nvim', 'terminal')
 
   -- misc
   use('tweekmonster/startuptime.vim')
