@@ -20,10 +20,10 @@ local selected_keys = {
 local highlights = {}
 for _, key in ipairs(selected_keys) do
   highlights[key] = {
-    guibg = normal_bg,
+    bg = normal_bg,
   }
 end
-highlights.indicator_selected.guifg = '#61afef'
+highlights.indicator_selected.fg = '#61afef'
 
 require('bufferline').setup({
   highlights = highlights,

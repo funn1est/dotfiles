@@ -13,7 +13,7 @@ return packer.startup(function(use)
   end
 
   -- theme
-  use('siduck76/nvim-base16.lua')
+  use('norcalli/nvim-base16.lua')
   use('norcalli/nvim-colorizer.lua')
 
   -- icons
@@ -135,7 +135,11 @@ return packer.startup(function(use)
 
   use_with_config('kyazdani42/nvim-tree.lua', 'nvim_tree')
   use_with_config('lewis6991/gitsigns.nvim', 'gitsigns')
-  use_with_config('nvim-telescope/telescope.nvim', 'telescope')
+  use({
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.0',
+    config = config('telescope'),
+  })
   use_with_config('glepnir/dashboard-nvim', 'dashboard')
   use('folke/which-key.nvim')
   use({
