@@ -135,6 +135,7 @@ return packer.startup(function(use)
 
   use_with_config('kyazdani42/nvim-tree.lua', 'nvim_tree')
   use_with_config('lewis6991/gitsigns.nvim', 'gitsigns')
+  use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
   use({
     'nvim-telescope/telescope.nvim',
     tag = '0.1.0',

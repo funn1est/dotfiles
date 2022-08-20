@@ -27,6 +27,12 @@ require('nvim-tree').setup({
       },
     },
   },
+  filters = {
+    custom = {
+      '^.git$',
+      '^.idea$',
+    },
+  },
 })
 
 -- Mappings for nvimtree
