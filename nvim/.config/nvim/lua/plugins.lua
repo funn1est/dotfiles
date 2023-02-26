@@ -46,7 +46,6 @@ return packer.startup(function(use)
   use('mg979/vim-visual-multi')
 
   -- lsp
-
   use({
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v1.x',
@@ -71,40 +70,6 @@ return packer.startup(function(use)
       { 'rafamadriz/friendly-snippets' },
     },
   })
-  --use('williamboman/nvim-lsp-installer')
-  --use({
-  --  'neovim/nvim-lspconfig',
-  --  config = config('lsp'),
-  --  --after = 'nvim-cmp',
-  --  after = 'cmp-nvim-lsp',
-  --})
-  --use('jose-elias-alvarez/null-ls.nvim')
-
-  --use({
-  --  'hrsh7th/nvim-cmp',
-  --  config = config('nvim_cmp'),
-  --  event = 'InsertEnter',
-  --  requires = {
-  --    {
-  --      'L3MON4D3/LuaSnip',
-  --      config = config('luasnip'),
-  --      after = 'nvim-cmp',
-  --      requires = {
-  --        'rafamadriz/friendly-snippets',
-  --      },
-  --    },
-  --    { 'saadparwaiz1/cmp_luasnip', after = 'LuaSnip' },
-  --    { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
-  --    { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
-  --    { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
-  --    { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
-  --    { 'tzachar/cmp-tabnine', run = './install.sh', after = 'nvim-cmp' },
-  --    { 'windwp/nvim-autopairs', config = config('autopairs'), after = 'nvim-cmp' },
-  --  },
-  --})
-
-  -- use({ 'ms-jpq/coq_nvim', branch = 'coq', config = config('coq_nvim') })
-  -- use({ 'ms-jpq/coq.artifacts', branch = 'artifacts' })
 
   -- lang
   use({
@@ -161,11 +126,11 @@ return packer.startup(function(use)
   use_with_config('kyazdani42/nvim-tree.lua', 'nvim_tree')
   use_with_config('lewis6991/gitsigns.nvim', 'gitsigns')
   use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
+  use({ 'nvim-telescope/telescope-ui-select.nvim' })
   use({
     'nvim-telescope/telescope.nvim',
     tag = '0.1.x',
     requires = { { 'nvim-lua/plenary.nvim' } },
-    config = config('telescope'),
   })
   use_with_config('glepnir/dashboard-nvim', 'dashboard')
   use('folke/which-key.nvim')

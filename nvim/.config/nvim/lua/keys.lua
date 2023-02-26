@@ -102,14 +102,12 @@ local n_mappings = {
   },
   l = {
     name = 'LSP',
-    a = { [[<cmd>lua require('telescope.builtin').lsp_code_actions()<cr>]], 'Code Action' },
-    A = { [[<cmd>lua require('telescope.builtin').lsp_range_code_actions()<cr>]], 'Selected Action' },
     d = {
-      '<cmd>Trouble lsp_document_diagnostics<cr>',
+      '<cmd>Trouble document_diagnostics<cr>',
       'Document Diagnostics',
     },
     D = {
-      '<cmd>Trouble lsp_workspace_diagnostics<cr>',
+      '<cmd>Trouble workspace_diagnostics<cr>',
       'Workspace Diagnostics',
     },
     c = { [[<cmd>Telescope diagnostics bufnr=0<cr>]], 'Cursor Diagnostics' },
