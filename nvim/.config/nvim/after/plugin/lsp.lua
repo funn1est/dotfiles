@@ -28,9 +28,10 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set('n', ']d', vim.diagnostic.goto_prev, opts)
   vim.keymap.set('n', '<leader>vws', vim.lsp.buf.workspace_symbol, opts)
   vim.keymap.set('n', '<leader>vd', vim.diagnostic.open_float, opts)
-  vim.keymap.set('n', '<leader>vca', vim.lsp.buf.code_action, opts)
+  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
+  vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, opts)
+  vim.keymap.set('n', '<leader>cr', vim.lsp.buf.rename, opts)
   vim.keymap.set('n', '<leader>vrr', vim.lsp.buf.references, opts)
-  vim.keymap.set('n', '<leader>vrn', vim.lsp.buf.rename, opts)
   vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
 end)
 
@@ -72,6 +73,7 @@ null_ls.setup({
     b.formatting.stylua.with({
       args = { '--config-path', vim.fn.expand('~/.config/stylua.toml'), '--stdin-filepath', '$FILENAME', '-' },
     }),
+    b.formatting.rustfmt,
   },
 })
 

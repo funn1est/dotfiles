@@ -8,9 +8,6 @@ return packer.startup(function(use)
   local config = function(name)
     return string.format([[require('config.%s')]], name)
   end
-  local use_with_config = function(path, name)
-    use({ path, config = config(name) })
-  end
 
   -- theme
   use('norcalli/nvim-base16.lua')
@@ -42,7 +39,7 @@ return packer.startup(function(use)
       --vim.api.nvim_command('hi link illuminatedCurWord Search')
     end,
   })
-  use_with_config('justinmk/vim-sneak', 'vim_sneak')
+  use('justinmk/vim-sneak')
   use('mg979/vim-visual-multi')
 
   -- lsp
@@ -123,8 +120,15 @@ return packer.startup(function(use)
   -- ts
   --use('jose-elias-alvarez/nvim-lsp-ts-utils')
 
-  use_with_config('kyazdani42/nvim-tree.lua', 'nvim_tree')
-  use_with_config('lewis6991/gitsigns.nvim', 'gitsigns')
+  use({
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = 'v2.x',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons',
+      'MunifTanjim/nui.nvim',
+    },
+  })
   use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
   use({ 'nvim-telescope/telescope-ui-select.nvim' })
   use({
@@ -132,14 +136,13 @@ return packer.startup(function(use)
     tag = '0.1.x',
     requires = { { 'nvim-lua/plenary.nvim' } },
   })
-  use_with_config('glepnir/dashboard-nvim', 'dashboard')
+  use('glepnir/dashboard-nvim')
   use('folke/which-key.nvim')
   use({
     'lukas-reineke/indent-blankline.nvim',
     event = 'BufReadPre',
     config = config('indent_blankline'),
   })
-  use_with_config('akinsho/toggleterm.nvim', 'terminal')
 
   -- misc
   use('tweekmonster/startuptime.vim')
