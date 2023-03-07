@@ -5,10 +5,6 @@ vim.cmd('packadd packer.nvim')
 return packer.startup(function(use)
   use('wbthomason/packer.nvim')
 
-  local config = function(name)
-    return string.format([[require('config.%s')]], name)
-  end
-
   -- theme
   use('norcalli/nvim-base16.lua')
   use('norcalli/nvim-colorizer.lua')
@@ -21,16 +17,8 @@ return packer.startup(function(use)
     end,
   })
 
-  use({
-    'akinsho/bufferline.nvim',
-    event = 'BufReadPre',
-    config = config('bufferline'),
-  })
-  use({
-    'nvim-lualine/lualine.nvim',
-    event = 'VimEnter',
-    config = config('lualine'),
-  })
+  use('akinsho/bufferline.nvim')
+  use('nvim-lualine/lualine.nvim')
 
   use({
     'RRethy/vim-illuminate',
@@ -72,14 +60,12 @@ return packer.startup(function(use)
   use({
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
-    opt = true,
-    event = 'BufRead',
+    -- opt = true,
     requires = {
       'p00f/nvim-ts-rainbow',
       'nvim-treesitter/nvim-treesitter-textobjects',
       'RRethy/nvim-treesitter-textsubjects',
     },
-    config = config('treesitter'),
   })
   use({
     'windwp/nvim-autopairs',
@@ -138,11 +124,7 @@ return packer.startup(function(use)
   })
   use('glepnir/dashboard-nvim')
   use('folke/which-key.nvim')
-  use({
-    'lukas-reineke/indent-blankline.nvim',
-    event = 'BufReadPre',
-    config = config('indent_blankline'),
-  })
+  use('lukas-reineke/indent-blankline.nvim')
 
   -- misc
   use('tweekmonster/startuptime.vim')

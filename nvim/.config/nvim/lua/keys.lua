@@ -58,6 +58,12 @@ local n_mappings = {
   },
   f = {
     name = 'Search',
+    e = {
+      function()
+        require('neo-tree.command').execute({ toggle = true })
+      end,
+      'File Explorer',
+    },
     f = {
       [[<cmd>lua require('telescope.builtin').find_files({ prompt_prefix = "🔍", find_command = { "rg", "--hidden", "--smart-case", "-g", "!{node_modules,.git}" ,"--files" } })<cr>]],
       'Find File',
