@@ -6,7 +6,7 @@ return packer.startup(function(use)
   use('wbthomason/packer.nvim')
 
   -- theme
-  use('norcalli/nvim-base16.lua')
+  use({ 'catppuccin/nvim', as = 'catppuccin' })
   use('norcalli/nvim-colorizer.lua')
 
   -- icons
@@ -127,6 +127,12 @@ return packer.startup(function(use)
   use('lukas-reineke/indent-blankline.nvim')
 
   -- misc
+  use({
+    'stevearc/dressing.nvim',
+    config = function()
+      require('dressing').setup()
+    end,
+  })
   use('tweekmonster/startuptime.vim')
   use('nvim-lua/popup.nvim')
   use('nvim-lua/plenary.nvim')

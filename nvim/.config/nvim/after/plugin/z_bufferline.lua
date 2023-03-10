@@ -1,32 +1,5 @@
-local normal_bg = '#3e4451'
-local selected_keys = {
-  'tab_selected',
-  'close_button_selected',
-  'buffer_selected',
-  'diagnostic_selected',
-  'info_selected',
-  'info_diagnostic_selected',
-  'warning_selected',
-  'warning_diagnostic_selected',
-  'error_selected',
-  'error_diagnostic_selected',
-  'modified_selected',
-  'duplicate_selected',
-  'separator_selected',
-  'indicator_selected',
-  'pick_selected',
-}
-
-local highlights = {}
-for _, key in ipairs(selected_keys) do
-  highlights[key] = {
-    bg = normal_bg,
-  }
-end
-highlights.indicator_selected.fg = '#61afef'
-
 require('bufferline').setup({
-  highlights = highlights,
+  highlights = require('catppuccin.groups.integrations.bufferline').get(),
   options = {
     offsets = { { filetype = 'NvimTree', text = '' } },
     show_tab_indicators = true,
