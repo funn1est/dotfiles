@@ -19,6 +19,7 @@ return packer.startup(function(use)
 
   use('akinsho/bufferline.nvim')
   use('nvim-lualine/lualine.nvim')
+  use('mbbill/undotree')
 
   use({
     'RRethy/vim-illuminate',
@@ -27,13 +28,15 @@ return packer.startup(function(use)
       --vim.api.nvim_command('hi link illuminatedCurWord Search')
     end,
   })
-  use('justinmk/vim-sneak')
+
+  use('ggandor/leap.nvim')
+
   use('mg979/vim-visual-multi')
 
   -- lsp
   use({
     'VonHeikemen/lsp-zero.nvim',
-    branch = 'v1.x',
+    branch = 'dev-v2',
     requires = {
       -- LSP Support
       { 'neovim/nvim-lspconfig' },
@@ -80,14 +83,7 @@ return packer.startup(function(use)
 
   use({
     'folke/trouble.nvim',
-    event = 'BufReadPre',
-    cmd = { 'TroubleToggle', 'Trouble' },
-    config = function()
-      require('trouble').setup({
-        auto_open = false,
-        use_diagnostic_signs = true,
-      })
-    end,
+    requires = 'nvim-tree/nvim-web-devicons',
   })
 
   -- comment
@@ -100,11 +96,6 @@ return packer.startup(function(use)
       })
     end,
   })
-
-  -- rust
-  --use('simrat39/rust-tools.nvim')
-  -- ts
-  --use('jose-elias-alvarez/nvim-lsp-ts-utils')
 
   use({
     'nvim-neo-tree/neo-tree.nvim',
@@ -125,6 +116,8 @@ return packer.startup(function(use)
   use('glepnir/dashboard-nvim')
   use('folke/which-key.nvim')
   use('lukas-reineke/indent-blankline.nvim')
+
+  use('lewis6991/gitsigns.nvim')
 
   -- misc
   use({

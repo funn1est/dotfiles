@@ -1,53 +1,55 @@
-local lsp = require('lsp-zero')
+local lsp = require('lsp-zero').preset('recommended')
 
-lsp.preset('recommended')
-
-lsp.set_preferences({
-  set_lsp_keymaps = true,
-  manage_nvim_cmp = true,
-})
-
-lsp.nvim_workspace()
-
-lsp.set_preferences({
-  suggest_lsp_servers = false,
-  sign_icons = {
-    error = 'E',
-    warn = 'W',
-    hint = 'H',
-    info = 'I',
-  },
+lsp.set_sign_icons({
+  error = 'E',
+  warn = 'W',
+  hint = 'H',
+  info = 'I',
 })
 
 lsp.on_attach(function(client, bufnr)
-  local opts = { buffer = bufnr, remap = false }
+  local opts = { buffer = bufnr }
+  local bind = vim.keymap.set
+  lsp.default_keymaps(opts) -- add lsp-zero defaults
 
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-  vim.keymap.set('n', '[d', vim.diagnostic.goto_next, opts)
-  vim.keymap.set('n', ']d', vim.diagnostic.goto_prev, opts)
-  vim.keymap.set('n', '<leader>vws', vim.lsp.buf.workspace_symbol, opts)
-  vim.keymap.set('n', '<leader>vd', vim.diagnostic.open_float, opts)
-  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
-  vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, opts)
-  vim.keymap.set('n', '<leader>cr', vim.lsp.buf.rename, opts)
-  vim.keymap.set('n', '<leader>vrr', vim.lsp.buf.references, opts)
-  vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
+  bind('n', '<leader>cf', vim.lsp.buf.format, opts)
 end)
 
+require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+
 lsp.setup()
+
+local cmp = require('cmp')
+local cmp_action = require('lsp-zero').cmp_action()
+
+cmp.setup({
+  mapping = {
+    ['<Tab>'] = cmp_action.luasnip_supertab(),
+    ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+  },
+})
 
 vim.diagnostic.config({
   virtual_text = true,
 })
 
---require('mason').setup()
---require('mason-lspconfig').setup()
+require('mason').setup()
+require('mason-lspconfig').setup({
+  ensure_installed = {
+    'cssls',
+    'html',
+    'jsonls',
+    'lua_ls',
+    'rust_analyzer',
+    'taplo',
+    'tsserver',
+  },
+})
 
---require('mason-null-ls').setup_handlers()
-
-local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 local null_ls = require('null-ls')
+local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 local null_opts = lsp.build_options('null-ls', {
   on_attach = function(client, bufnr)
     if client.supports_method('textDocument/formatting') then
@@ -74,10 +76,12 @@ null_ls.setup({
       args = { '--config-path', vim.fn.expand('~/.config/stylua.toml'), '--stdin-filepath', '$FILENAME', '-' },
     }),
     b.formatting.rustfmt,
+    b.formatting.prettier,
   },
 })
 
 require('mason-null-ls').setup({
   ensure_installed = { 'stylua' },
+  automatic_installation = true,
   automatic_setup = false,
 })

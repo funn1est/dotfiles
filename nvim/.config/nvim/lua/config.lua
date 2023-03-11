@@ -1,6 +1,5 @@
 local utils = require('utils')
 local opt = utils.opt
-local map = utils.map
 
 vim.cmd('syntax on')
 
@@ -38,41 +37,13 @@ opt('ignorecase', true)
 opt('smartcase', true)
 
 opt('timeoutlen', 300)
-opt('updatetime', 300)
+opt('updatetime', 50)
 
---opt('completeopt', 'menuone,noselect,noinsert')
 opt('signcolumn', 'yes')
 
 opt('undofile', true)
 
 opt('listchars', 'nbsp:¬,eol:¶,extends:»,precedes:«,trail:•')
-
-map('n', '<leader>w', '<cmd>wa<cr>')
-map('n', '<C-s>', '<cmd>up<cr>')
-map('n', '<C-f>', '<Nop>')
-map('n', '<C-b>', '<Nop>')
-
-map('i', 'jj', '<esc>')
-map('i', '<C-h>', '<left>')
-map('i', '<C-j>', '<down>')
-map('i', '<C-k>', '<up>')
-map('i', '<C-l>', '<right>')
-map({ 'n', 'v' }, 'H', '^')
-map({ 'n', 'v' }, 'L', '$')
-map('n', '<cr>', 'G')
-map('n', '<bs>', 'gg')
-map('n', 'U', '<C-r>')
-map('n', 'Y', 'y$')
-map('n', '<leader>hl', '<cmd>nohls<cr>')
-map('n', '<leader>ij', 'o<esc>k')
-map('n', '<leader>ik', 'O<esc>j')
-map('x', '<', '<gv')
-map('x', '>', '>gv')
-
-map('x', '<leader>p', '"_dP')
-map({ 'n', 'v' }, '<leader>y', '"+y')
-map({ 'n', 'v' }, '<leader>d', '"_d')
-map('n', '<leader>Y', '"+Y', { noremap = false })
 
 require('keys')
 

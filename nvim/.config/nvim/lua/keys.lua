@@ -8,6 +8,30 @@ wk.setup({
   },
 })
 
+map('n', '<C-s>', '<cmd>up<cr>')
+map('n', '<C-f>', '<Nop>')
+map('n', '<C-b>', '<Nop>')
+
+map('i', 'jj', '<esc>')
+map('i', '<C-h>', '<left>')
+map('i', '<C-j>', '<down>')
+map('i', '<C-k>', '<up>')
+map('i', '<C-l>', '<right>')
+map({ 'n', 'v' }, 'H', '^')
+map({ 'n', 'v' }, 'L', '$')
+map('n', 'U', '<C-r>')
+map('n', 'Y', 'y$')
+map('n', '<leader>hl', '<cmd>nohls<cr>')
+map('n', '<leader>ij', 'o<esc>k')
+map('n', '<leader>ik', 'O<esc>j')
+map('x', '<', '<gv')
+map('x', '>', '>gv')
+
+map('x', '<leader>p', '"_dP')
+map({ 'n', 'v' }, '<leader>y', '"+y')
+map({ 'n', 'v' }, '<leader>d', '"_d')
+map('n', '<leader>Y', '"+Y', { noremap = false })
+
 map('n', ',p', '"0p', { noremap = false })
 map('n', ',P', '"0P', { noremap = false })
 
@@ -33,8 +57,6 @@ map('t', '<C-j>', [[<C-\><C-n><C-w>j]])
 map('t', '<C-k>', [[<C-\><C-n><C-w>k]])
 map('t', '<C-l>', [[<C-\><C-n><C-w>l]])
 
-map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
-
 local n_opts = {
   mode = 'n',
   prefix = '<leader>',
@@ -56,6 +78,7 @@ local n_mappings = {
     L = { '<C-W>5>', 'expand-window-right' },
     K = { ':resize -5', 'expand-window-up' },
   },
+  u = { '<cmd>UndotreeToggle<cr>', 'Undo' },
   f = {
     name = 'Search',
     e = {
