@@ -13,6 +13,9 @@ lsp.on_attach(function(client, bufnr)
   lsp.default_keymaps(opts) -- add lsp-zero defaults
 
   bind('n', '<leader>cf', vim.lsp.buf.format, opts)
+  bind('n', '<leader>cr', vim.lsp.buf.rename, opts)
+  bind('n', '<leader>ca', vim.lsp.buf.code_action, opts)
+  bind('x', '<leader>ca', vim.lsp.buf.range_code_action, opts)
 end)
 
 require('neodev').setup()
