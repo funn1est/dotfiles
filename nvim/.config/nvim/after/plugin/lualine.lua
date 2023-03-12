@@ -1,7 +1,7 @@
 local function lsp_progress()
   local messages = vim.lsp.util.get_progress_messages()
   if #messages == 0 then
-    return
+    return ''
   end
   local status = {}
   for _, msg in pairs(messages) do
@@ -24,10 +24,15 @@ local config = {
   },
   sections = {
     lualine_a = { 'mode' },
-    lualine_b = { 'branch' },
-    lualine_c = { { 'diagnostics', sources = { 'nvim_diagnostic' } }, 'filename' },
-    lualine_x = { 'filetype', lsp_progress },
+    lualine_b = {
+      'branch',
+      'diff',
+      { 'diagnostics', symbols = { error = 'E:', warn = 'W:', info = 'I:', hint = 'H:' } },
+    },
+    lualine_c = { 'filename' },
+    lualine_x = { 'encoding', 'filetype', lsp_progress },
     lualine_y = { 'progress' },
+    lualine_z = { 'location' },
   },
   inactive_sections = {
     lualine_a = {},
@@ -37,7 +42,7 @@ local config = {
     lualine_y = {},
     lualine_z = {},
   },
-  extensions = { 'nvim-tree' },
+  extensions = { 'neo-tree' },
 }
 
 require('lualine').setup(config)

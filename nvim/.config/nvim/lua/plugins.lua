@@ -71,12 +71,11 @@ return packer.startup(function(use)
     },
   })
   use({
-    'windwp/nvim-autopairs',
+    'echasnovski/mini.pairs',
     config = function()
-      require('nvim-autopairs').setup()
+      require('mini.pairs').setup()
     end,
   })
-  use('alvan/vim-closetag')
 
   -- lua
   use('folke/lua-dev.nvim')
@@ -118,6 +117,20 @@ return packer.startup(function(use)
   use('lukas-reineke/indent-blankline.nvim')
 
   use('lewis6991/gitsigns.nvim')
+
+  use('zbirenbaum/copilot-cmp')
+  use({
+    'zbirenbaum/copilot.lua',
+    cmd = 'Copilot',
+    event = 'InsertEnter',
+    config = function()
+      require('copilot').setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      })
+      require('copilot_cmp').setup()
+    end,
+  })
 
   -- misc
   use({
