@@ -1,5 +1,3 @@
 vim.g.mapleader = ' '
-
-require('plugins')
-
-require('config')
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.lazy")
