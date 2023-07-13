@@ -20,6 +20,7 @@ map({ "n", "v" }, "L", "$")
 map("n", "<leader>ij", "o<esc>k")
 map("n", "<leader>ik", "O<esc>j")
 
+map("n", "U", "<C-r>")
 -- keep J cursor position
 map("n", "J", "mzJ`z")
 map("n", "<C-d>", "<C-d>zz")
@@ -27,7 +28,7 @@ map("n", "<C-u>", "<C-u>zz")
 map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
 
-map("n", "gp", "%")
+--map("n", "gp", "%")
 
 map("x", "<leader>p", '"_dP')
 map({ "n", "v" }, "<leader>y", '"+y')
