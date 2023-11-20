@@ -6,15 +6,11 @@ return {
     end,
   },
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "stevearc/conform.nvim",
     opts = function(_, opts)
-      local nls = require("null-ls")
-
-      opts.sources = {
-        nls.builtins.formatting.stylua,
-        nls.builtins.formatting.shfmt,
-        nls.builtins.formatting.prettierd,
-      }
+      opts.formatters_by_ft = vim.list_extend(opts.formatters_by_ft or {}, {
+        javascript = { { "prettierd", "prettier" } },
+      })
     end,
   },
   {

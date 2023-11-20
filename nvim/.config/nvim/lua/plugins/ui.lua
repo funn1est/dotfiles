@@ -6,6 +6,7 @@ local logo = [[
 ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
 ]]
+logo = string.rep("\n", 6) .. logo .. "\n\n"
 
 return {
   {
@@ -15,9 +16,9 @@ return {
     end,
   },
   {
-    "goolord/alpha-nvim",
+    "nvimdev/dashboard-nvim",
     opts = function(_, opts)
-      opts.section.header.val = vim.split(logo, "\n", { trimempty = true })
+      opts.config.header = vim.split(logo, "\n")
     end,
   },
 }
