@@ -10,6 +10,7 @@ return {
     opts = function(_, opts)
       opts.formatters_by_ft = vim.list_extend(opts.formatters_by_ft or {}, {
         javascript = { { "prettierd", "prettier" } },
+        typescriptreact = { { "prettierd", "prettier" } },
       })
     end,
   },
