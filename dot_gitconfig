@@ -1,0 +1,15 @@
+[user]
+	name = funn1est
+	email = admin@f1t.io
+	signingkey = B276F518AE4318494A861EE092F41C130455B458
+[core]
+	ignorecase = false
+	autocrlf = input
+	editor = nvim
+[commit]
+	gpgsign = true
+[credential]
+	helper = store
+	credentialStore = gpg
+[gpg]
+	program = gpg
